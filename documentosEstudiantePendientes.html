@@ -18,7 +18,7 @@
         <!-- Barra navegación-->
         <nav class="navbar navbar-expand-md navbar-light bg-light border-3 border-bottom border-primary">
             <div class="container-fluid">
-                <a href="#" class="navbar-brand">SRDM</a>
+                <a href="menu.html" class="navbar-brand">SRDM</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,16 +26,31 @@
                     <ul class="navbar-nav ms-3">
                         <li class="nav-item"><a class="nav-link" href="#">Información personal</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Subir
-                                Documentos
+                            <a class="nav-link dropdown-toggle" href="cargarDocumentos.html" role="button"
+                                data-bs-toggle="dropdown">
+                                Subir Documentos
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Cargar Documentos</a></li>
+                                <li><a class="dropdown-item" href="cargarDocumentos.html">Cargar Documentos</a></li>
                                 <li><a class="dropdown-item" href="">Ver Documentos Pendientes</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Verificación de Documentos</a></li>
+    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Herramientas de verificación y matricula
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="nuevoEstudiante.html">Crear Nuevo estudiante</a></li>
+                                <li><a class="dropdown-item" href="verificacionDocumentos.html">Verificación de
+                                        Documentos</a></li>
+                                <li><a class="dropdown-item" href="matricular.html">Matricular</a></li>
+    
+                            </ul>
+                        </li>
+    
                     </ul>
+    
                     <ul class="navbar-nav ms-3 ">
                         <li class="nav-item position-absolute top-0 end-0 "><a class="nav-link text-nowrap" href="#">Cerrar
                                 Sesión</a></li>
@@ -44,6 +59,7 @@
     
             </div>
         </nav>
+    
     </div>
 
     <div class="container mt-5">
