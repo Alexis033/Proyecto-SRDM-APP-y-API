@@ -5,11 +5,11 @@ class usuario {
         this.id= id;
     }
 
-    // this.iniciarSesion = ()=>{
+    // iniciarSesion = ()=>{
         // poner el metodo para iniciar sesión cuando aprendas cómo
     // }
 
-    // this.cerrarSesion = ()=>{
+    // cerrarSesion = ()=>{
         // poner el metodo para cerrar sesión cuando aprendas cómo
     // }
 }
@@ -22,7 +22,7 @@ class documento {
         this.estado= estado;
         this.documento= archivo;
     }
-    this.solicitar= ()=>{
+    solicitar= ()=>{
     
 }
 }
