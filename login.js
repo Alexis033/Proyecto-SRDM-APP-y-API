@@ -1,4 +1,6 @@
 const mysql= require('mysql');
+const user= "10guevarafm1102@gmail.com";
+const password= "123456789" ;
 
 const conection = mysql.createConnection({
     host:'localhost',
@@ -12,10 +14,16 @@ conection.connect((err) =>{
     console.log('La conexión funciona')
 })
 
-conection.query('select Usuario, Contraseña from usuario where Usuario="pepe12@hotmail.com"', (err, rows) =>{
+conection.query(`select * from usuario WHERE Usuario="${user}" AND Contraseña =${password}`, (err, rows) =>{
     if (err) throw err
-    console.log('los datos de la tabla son estos:')
-    console.log(rows)
+           
+    else if (rows[0].Usuario == user && rows[0].Contraseña==password){
+        console.log("conectado");
+        // console.log(rows);
+    }
+    else{
+        console.log("error");
+    }
 })
 
-conection.end()
+conection.end();
