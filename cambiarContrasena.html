@@ -25,15 +25,18 @@
             <div class="m-2">
 
                 <div class="m-3">
-                    <label for="emailInput" class="form-label fw-bold">Ingrese su correo electrónico</label>
-                    <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="Escribe tu email">
+                    <form action="" id="correoCambioContraseña">
+                        <label for="emailInput" class="form-label fw-bold">Ingrese su correo electrónico</label>
+                        <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="Escribe tu email">
+                    </form>
+                    
                 </div>
                 <br>
-                <p class="m-3">Esta acción restablecerá su contraseña y no puede ser reversada ¿está seguro de continuar?</p>
+                <p class="m-3 mt-0">Esta acción restablecerá su contraseña y no puede ser reversada ¿está seguro de continuar?</p>
             </div>
 
             <div class=" m-3"> <!--position-relative top-100 start-50 translate-middle-->
-                <button type="submit" class="btn btn-outline-danger mx-auto ">Aceptar</button>
+                <button type="submit" class="btn btn-outline-danger mx-auto " form="correoCambioContraseña">Aceptar</button>
                 <button type="submit" class="btn btn-outline-danger mx-auto">Cancelar</button>
             </div>
 
