@@ -3,7 +3,7 @@ from typing import Optional
 
 class UserSchema(BaseModel):
     id:Optional[int]
-    usuario:str
-    contrasena: str
+    Usuario:str
+    Contraseña: str
     id_rol:Optional[int]=2
-    estado:Optional[str]
+    Estado:Optional[int]
