@@ -1,22 +1,21 @@
-from sqlalchemy import Table, Column
-from sqlalchemy.sql.sqltypes import Integer, String
-from config.db import engine, meta_data
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
-# ``users= Table("usuario", meta_data,
-#             Column("id", Integer, primary_key=True, nullable=False, unique= True),
-#             Column("usuario", String(50), nullable=False),
-#             Column("contrasena", String(50), nullable=False),
-#             Column("id_rol", Integer, nullable=True, default=2),
-#             Column("estado", Integer, nullable=True, default=None))``
-#meta_data.create_all(engine)
+Base = declarative_base()
 
-meta_data.reflect(bind=engine)
-#usuario = Table("usuario", meta_data, autoload_with=engine)
+class Usuario(Base):
+    __tablename__ = "usuario"
+    id = Column("id", Integer, primary_key=True, nullable=False, unique= True, autoincrement=True, index=True)
+    Usuario = Column("Usuario", String(50), nullable=False, unique=True, index=True)
+    Password = Column("Password", String(50), nullable=False)
+    id_rol = Column("id_rol", Integer, nullable=True, default=2)
+    Estado = Column("Estado", Integer, nullable=True, default=1)
 
-usuario= meta_data.tables["usuario"]
-estudiante= meta_data.tables["estudiante"]
-rol= meta_data.tables["rol"]
-curso=meta_data.tables["curso"]
-documento=meta_data.tables["documento"]
-lista_documentos=meta_data.tables["lista_documentos"]
-matricula=meta_data.tables["matrícula"]
+#meta_data.reflect(bind=engine, extend_existing=True)
+# usuario= meta_data.tables["usuario"]
+# estudiante= meta_data.tables["estudiante"]
+# rol= meta_data.tables["rol"]
+# curso=meta_data.tables["curso"]
+# documento=meta_data.tables["documento"]
+# lista_documentos=meta_data.tables["lista_documentos"]
+# matricula=meta_data.tables["matrícula"]

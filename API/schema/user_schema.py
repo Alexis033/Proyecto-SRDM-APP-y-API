@@ -1,9 +1,18 @@
 from pydantic import BaseModel
-from typing import Optional
 
 class UserSchema(BaseModel):
-    id:Optional[int]
+    id: int | None= None
     Usuario:str
-    Contraseña: str
-    id_rol:Optional[int]=2
-    Estado:Optional[int]
+    Password:str ="123456789"
+    id_rol:int | None =2
+    Estado:int | None =1
+
+    class Config:
+        orm_mode = True
+
+class UserUpdateSchema(BaseModel):
+    Password:str | None
+    Estado:int | None 
+
+    class Config:
+        orm_mode = True
