@@ -16,3 +16,12 @@ class UserUpdateSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class User(BaseModel):
+    id: int | None= None
+    Usuario:str
+    id_rol:int | None
+    Estado:int | None
+
+    class Config:
+        orm_mode = True
