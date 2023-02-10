@@ -18,6 +18,11 @@ class UserUpdateSchema(BaseModel):
 
     class Config:
         orm_mode = True
+        
+class MyPasswordUpdateSchema(BaseModel):
+    Password:str
+    class Config:
+        orm_mode = True
 
 class User(BaseModel):
     id: int | None
