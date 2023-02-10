@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+import pytz
 
 Base = declarative_base()
 
@@ -11,7 +12,7 @@ class UsuarioDB(Base):
     Password = Column("Password", String(50), nullable=False)
     id_rol = Column("id_rol", Integer, default=2)
     Estado = Column("Estado", Integer, nullable=True, default=1)
-    created_at=Column(DateTime(), default= datetime.now())
+    created_at=Column(DateTime(), default= datetime.now(tz=(pytz.timezone("America/Bogota"))))
     
 
 #codigo para crear las tablas en la base de datos
