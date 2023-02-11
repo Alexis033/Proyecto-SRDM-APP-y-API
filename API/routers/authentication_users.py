@@ -7,7 +7,7 @@ from schema.user_schema import User
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from config.db import SessionLocal
+from config.db import get_db
 
 ALGORITHM= "HS256"
 ACCESS_TOKEN_DURATION=10
@@ -20,12 +20,6 @@ oauth2= OAuth2PasswordBearer(tokenUrl="login")
 
 crypt= CryptContext(schemes=["bcrypt"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 async def search_user(usuario: str, db: Session =Depends(get_db)):    
     user = db.query(UsuarioDB).filter(UsuarioDB.Usuario == usuario).first()
@@ -33,7 +27,6 @@ async def search_user(usuario: str, db: Session =Depends(get_db)):
         return user
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-
 
 
 async def auth_user(token: str = Depends(oauth2), db: Session =Depends(get_db)):

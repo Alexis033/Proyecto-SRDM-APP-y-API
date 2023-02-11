@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from schema.user_schema import UserSchema, UserUpdateSchema, User, MyPasswordUpdateSchema
-from config.db import SessionLocal
+from config.db import get_db
 from model.models import UsuarioDB
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
@@ -12,12 +12,6 @@ user= APIRouter(prefix="/user",
 
 crypt= CryptContext(schemes=["bcrypt"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @user.get("/", response_model= List[User])
 async def read_users(user: User= Depends(current_user) ,db: Session =Depends(get_db)):

@@ -48,6 +48,7 @@ async function login (e) {
     } catch (error) {
         console.log(error);
         alert("Ha ocurrido un error, por favor intente nuevamente")
+        return;
     }
     window.location.href = urlMenu;
 }
