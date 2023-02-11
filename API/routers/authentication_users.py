@@ -39,8 +39,8 @@ async def search_user(usuario: str, db: Session =Depends(get_db)):
 async def auth_user(token: str = Depends(oauth2), db: Session =Depends(get_db)):
     exception= HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, 
                             detail="Credenciales de autentificación inválidas",
-                            headers={"WWW-Authenticate":"Bearrer"})
-    
+                            headers={"WWW-Authenticate":"Bearer"})
+                                    
     try:
         user_name=jwt.decode(token,SECRET_KEY,algorithms=ALGORITHM).get("sub")
     except JWTError:
@@ -57,7 +57,7 @@ async def current_user(user: User= Depends(auth_user)):
         raise HTTPException(
             status_code= status.HTTP_401_UNAUTHORIZED,
             detail=f"Usuario no autorizado", 
-            headers={"WWW-Authenticate":"Bearrer"})
+            headers={"WWW-Authenticate":"Bearer"})
     return user
 
 @authentication.post("/")

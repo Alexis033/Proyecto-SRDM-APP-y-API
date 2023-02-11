@@ -1,9 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, constr
 from datetime import datetime
 
 class UserSchema(BaseModel):
     id: int | None= None
-    Usuario:str
+    Usuario:constr(regex=r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
     Password:str ="123456789"
     id_rol:int =2
     Estado:int | None =1

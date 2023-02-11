@@ -40,7 +40,7 @@ async def create_user(data_user: UserSchema, db: Session =Depends(get_db), user:
     new_user= data_user.dict()
     new_user["Password"]=crypt.hash(data_user.Password)
     user_db = UsuarioDB(**new_user)
-
+    db.add(user_db)
     db.commit()
     db.refresh(user_db)
     return user_db
