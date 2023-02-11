@@ -20,7 +20,6 @@ async function login (e) {
     }
     else{
         let token= data.access_token;   
-    
         let login= await fetch("http://127.0.0.1:8000/menu", { 
             method: "GET",
             headers: {
@@ -28,10 +27,6 @@ async function login (e) {
         })
         let dataLogin = await login.text();
         
-        document.body.innerHTML = dataLogin;
+        window.location.href = "http://127.0.0.1:8000/menu/";
     }   
-    //window.location.href = "http://127.0.0.1:8000/menu";
-    
-    
-
 }

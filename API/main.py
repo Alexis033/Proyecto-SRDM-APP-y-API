@@ -33,3 +33,5 @@ def menu(user: User= Depends(authentication_users.auth_user)): #agregar la auten
             
     html_address= "./public/static/html/menu.html"
     return FileResponse(html_address)
+
+    #iniciar servidor: uvicorn main:app --reload
