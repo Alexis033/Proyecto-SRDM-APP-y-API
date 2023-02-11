@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-02-2023 a las 20:55:11
+-- Tiempo de generación: 12-02-2023 a las 00:06:48
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -82,14 +82,6 @@ CREATE TABLE `documento` (
   `Estado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `documento`
---
-
-INSERT INTO `documento` (`id`, `Id_Estudiante`, `Id_lista_documentos`, `Estado`) VALUES
-(1, 2, 1, '1'),
-(2, 2, 2, '0');
-
 -- --------------------------------------------------------
 
 --
@@ -108,22 +100,8 @@ CREATE TABLE `estudiante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `estudiante`
---
-
-INSERT INTO `estudiante` (`id`, `Id_curso`, `Correo`, `Nombres`, `Apellidos`, `Codigo`, `Edad`, `Telefono`) VALUES
-(2, 2, 'hola3@hotmail.com', 'Juan', 'Caro', NULL, NULL, NULL),
-(5, 5, 'pruebapepe@gmail.com', 'Pepe', 'Perez', NULL, NULL, NULL);
-
---
 -- Disparadores `estudiante`
 --
-DELIMITER $$
-CREATE TRIGGER `agregar_usuario` AFTER INSERT ON `estudiante` FOR EACH ROW BEGIN
-insert into usuario (usuario) value (new.correo);
-END
-$$
-DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `eliminar_usuario` BEFORE DELETE ON `estudiante` FOR EACH ROW BEGIN
 delete from usuario 
@@ -132,7 +110,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `modificar_usuario` AFTER UPDATE ON `estudiante` FOR EACH ROW BEGIN
+CREATE TRIGGER `estudiante_BEFORE_UPDATE` BEFORE UPDATE ON `estudiante` FOR EACH ROW BEGIN
 update usuario set usuario= new.correo
 where usuario=old.correo;
 END
@@ -202,19 +180,18 @@ INSERT INTO `rol` (`id`, `Rol`) VALUES
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `Usuario` varchar(45) NOT NULL,
-  `Contraseña` varchar(45) NOT NULL DEFAULT '123456789',
-  `id_rol` int(11) DEFAULT 2,
-  `Estado` int(11) DEFAULT NULL
+  `Password` varchar(100) NOT NULL DEFAULT '123456789',
+  `id_rol` int(11) NOT NULL DEFAULT 2,
+  `Estado` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 KEY_BLOCK_SIZE=2;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `Usuario`, `Contraseña`, `id_rol`, `Estado`) VALUES
-(1, '10guevarafm1102@gmail.com', '123456789', 1, NULL),
-(2, 'hola3@hotmail.com', '123456789', 2, NULL),
-(3, 'pruebapepe@gmail.com', '123456789', 2, NULL);
+INSERT INTO `usuario` (`id`, `Usuario`, `Password`, `id_rol`, `Estado`, `created_at`) VALUES
+(1, '10guevarafm1102@gmail.com', '$2b$12$zt.Z1LdaZ.vhBky4Zx6k.eo4LeVCvUvzxNwsfUc0N9ali6wKAAZC.', 1, 1, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -289,7 +266,7 @@ ALTER TABLE `documento`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `matrícula`
@@ -301,7 +278,7 @@ ALTER TABLE `matrícula`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas
@@ -311,26 +288,21 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `documento`
 --
 ALTER TABLE `documento`
-  ADD CONSTRAINT `fk_documento_estudiante_id` FOREIGN KEY (`Id_Estudiante`) REFERENCES `estudiante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_documento_estudiante_id` FOREIGN KEY (`Id_Estudiante`) REFERENCES `estudiante` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_documento_lista-documentos_id` FOREIGN KEY (`Id_lista_documentos`) REFERENCES `lista_documentos` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  ADD CONSTRAINT `fk_Estudiante_Curso_Id` FOREIGN KEY (`Id_curso`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Estudiante_Curso_Id` FOREIGN KEY (`Id_curso`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_estudiante_usuario_Usuario` FOREIGN KEY (`Correo`) REFERENCES `usuario` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `matrícula`
 --
 ALTER TABLE `matrícula`
   ADD CONSTRAINT `fk_Matricula_Estudiante1` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiante` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_Usuario_Rol1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
