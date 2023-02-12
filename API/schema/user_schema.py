@@ -2,7 +2,7 @@ from pydantic import BaseModel, constr
 from datetime import datetime
 
 class UserDBSchema(BaseModel):
-    id: int | None= None
+    id: int | None
     Usuario:constr(regex=r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
     Password:str ="123456789"
     id_rol:int =2

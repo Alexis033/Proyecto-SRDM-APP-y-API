@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from schema.user_schema import UserDBSchema, UserUpdateSchema, UserSchema, MyPasswordUpdateSchema
-from config.db import get_db
-from model.models import UsuarioDB
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from typing import List
+from config.db import get_db
+from model.models import UsuarioDB
+from schema.user_schema import UserDBSchema, UserUpdateSchema, UserSchema, MyPasswordUpdateSchema
+
+
 from routers.authentication_users import current_user, search_user
 
 user= APIRouter(prefix="/user",
@@ -32,6 +34,9 @@ async def create_user(data_user: UserDBSchema, db: Session =Depends(get_db), use
     if user.id_rol!=1:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no autorizado")
     new_user= data_user.dict()
+    user_verification= db.query(UsuarioDB).filter(UsuarioDB.Usuario==new_user["Usuario"]).first()
+    if user_verification:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Usuario ya existe")
     new_user["Password"]=crypt.hash(data_user.Password)
     user_db = UsuarioDB(**new_user)
     db.add(user_db)
@@ -69,7 +74,7 @@ async def update_my_password(new_password: MyPasswordUpdateSchema, db: Session =
     db.refresh(user_db)
     return user_db
 
-@user.delete("/{id}", status_code= status.HTTP_200_OK)
+@user.delete("/{id}", status_code= status.HTTP_204_NO_CONTENT)
 async def delete_user(id: int, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
     if user.id_rol!=1:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no autorizado")
@@ -79,4 +84,3 @@ async def delete_user(id: int, db: Session =Depends(get_db), user: UserSchema= D
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
     db.delete(user_db)
     db.commit() 
-    return {"Mensaje":f"Usuario con id:{id} eliminado correctamente"}

@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-#from routers.user import search_user
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from model.models import UsuarioDB
-from schema.user_schema import UserSchema
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from config.db import get_db
+from model.models import UsuarioDB
+from schema.user_schema import UserSchema
+
 
 ALGORITHM= "HS256"
 ACCESS_TOKEN_DURATION=10
