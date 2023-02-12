@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de contraseña</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        body {
+            background: #fffffd;
+            background: linear-gradient(to right, #f7f7f7b5, #fffffd);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5 rounded shadow text-center">
+        <div class="row bg-white align-items-stretch position-absolute top-50 start-50 translate-middle rounded shadow">
+                
+            <h2 class="fw-bold bg-warning text-center py-3 rounded-top">Cambiar contraseña</h2>
+            <div class="m-2">
+
+                <div class="m-3">
+                    <form action="" id="correoCambioContraseña">
+                        <label for="emailInput" class="form-label fw-bold">Ingrese su correo electrónico</label>
+                        <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="Escribe tu email">
+                    </form>
+                    
+                </div>
+                <br>
+                <p class="m-3 mt-0">Esta acción restablecerá su contraseña y no puede ser reversada ¿está seguro de continuar?</p>
+            </div>
+
+            <div class=" m-3"> <!--position-relative top-100 start-50 translate-middle-->
+                <button type="submit" class="btn btn-outline-danger mx-auto " form="correoCambioContraseña">Aceptar</button>
+                <button type="submit" class="btn btn-outline-danger mx-auto">Cancelar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
