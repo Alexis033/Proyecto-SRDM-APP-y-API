@@ -19,7 +19,7 @@ def root():
     return FileResponse(html_address)
 
 @app.get("/menu", response_class= HTMLResponse)
-def menu(user: User= Depends(authentication_users.auth_user)): #agregar la autentificación user: User= Depends(authentication_users.auth_user)
+def menu(user: User= Depends(authentication_users.auth_user)):
     if not user:
         raise HTMLResponse(status_code= status.HTTP_401_UNAUTHORIZED,
             detail=f"Usuario no autorizado", 
@@ -28,4 +28,5 @@ def menu(user: User= Depends(authentication_users.auth_user)): #agregar la auten
     html_address= "./public/static/html/menu.html"
     return FileResponse(html_address)
 
-    #iniciar servidor: uvicorn main:app --reload
+    #iniciar entorno virtual en windows: venv\Scripts\activate  
+    #iniciar servidor local: uvicorn main:app --reload
