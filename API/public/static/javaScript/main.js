@@ -31,24 +31,17 @@ async function login (e) {
             return;
         }
         else{
-            try{
-                let token= data.access_token;   
-                let login= await fetch(urlMenu, { 
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`}
-                })
-                //let dataLogin = await login.text();   
-            }catch (error) {
-                console.log(error);
-                alert("Ha ocurrido un error 2, por favor intente nuevamente");
-                return;
-            }  
+            let token= data.access_token;
+            localStorage.setItem("token", token);
+            window.location.href = urlMenu;   
         }   
     } catch (error) {
         console.log(error);
         alert("Ha ocurrido un error, por favor intente nuevamente")
         return;
     }
-    window.location.href = urlMenu;
 }
+
+
+// Para recuperar el valor de "token" en otras partes de tu código:
+const storedToken = localStorage.getItem("token");
