@@ -1,7 +1,7 @@
 from pydantic import BaseModel, constr
 from datetime import datetime
 
-class UserSchema(BaseModel):
+class UserDBSchema(BaseModel):
     id: int | None= None
     Usuario:constr(regex=r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
     Password:str ="123456789"
@@ -13,6 +13,7 @@ class UserSchema(BaseModel):
         orm_mode = True
 
 class UserUpdateSchema(BaseModel):
+    Usuario:constr(regex=r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$') | None
     Password:str | None
     Estado:int | None 
 
@@ -24,7 +25,7 @@ class MyPasswordUpdateSchema(BaseModel):
     class Config:
         orm_mode = True
 
-class User(BaseModel):
+class UserSchema(BaseModel):
     id: int | None
     Usuario:str
     id_rol:int

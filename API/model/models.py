@@ -18,3 +18,5 @@ class UsuarioDB(Base):
 #codigo para crear las tablas en la base de datos
 #if not engine.dialect.has_table(engine, "UsuarioDB"):
 #   Base.metadata.create_all(bind=engine)
+
+#codigo para eliminar Base.metadata.drop_all(bind=engine)

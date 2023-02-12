@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from model.models import UsuarioDB
-from schema.user_schema import User
+from schema.user_schema import UserSchema
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
@@ -45,7 +45,7 @@ async def auth_user(token: str = Depends(oauth2), db: Session =Depends(get_db)):
     
     return user
 
-async def current_user(user: User= Depends(auth_user)): 
+async def current_user(user: UserSchema= Depends(auth_user)): 
     if user.Estado==0:
         raise HTTPException(
             status_code= status.HTTP_401_UNAUTHORIZED,
@@ -63,6 +63,6 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
 
     return{"access_token": jwt.encode(access_token, SECRET_KEY, algorithm=ALGORITHM) , "token_type":"bearer"}
 
-@authentication.get("/me", response_model= User)
-async def me(user:User = Depends(current_user)):
+@authentication.get("/me", response_model= UserSchema)
+async def me(user:UserSchema = Depends(current_user)):
     return user

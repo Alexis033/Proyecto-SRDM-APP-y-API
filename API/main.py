@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from routers import user, authentication_users
 from config.db import get_db
-from schema.user_schema import User
+from schema.user_schema import UserSchema
 
 app= FastAPI()
 app.mount("/static", StaticFiles(directory="./public/static"), name="static")
