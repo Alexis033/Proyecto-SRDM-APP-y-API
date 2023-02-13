@@ -1,6 +1,6 @@
 
-const formulario = document.querySelector("#login")
-formulario.addEventListener("submit", login)
+const form = document.querySelector("#login");
+form.addEventListener("submit", login);
 
 async function login (e) {
     e.preventDefault();
@@ -42,6 +42,5 @@ async function login (e) {
     }
 }
 
-
-// Para recuperar el valor de "token" en otras partes de tu código:
-const storedToken = localStorage.getItem("token");
+// Para recuperar el valor de "token" en otras partes del código:
+//const storedToken = localStorage.getItem("token");
