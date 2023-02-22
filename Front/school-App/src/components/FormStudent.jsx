@@ -11,7 +11,6 @@ export const FormStudent = ({ userData }) => {
         <div className='border-top border-bottom border-primary border-3 mt-0 bg-'>
           <h3 className='fw-bold text-center'>Información Estudiante</h3>
         </div>
-
         <div className='col-11 col-md-8'>
           <label htmlFor='name' className='form-label fw-bold'>
             Nombre
@@ -26,7 +25,6 @@ export const FormStudent = ({ userData }) => {
             required
           />
         </div>
-
         <div className='col-11 col-md-8'>
           <label htmlFor='surname' className='form-label fw-bold'>
             Apellidos
@@ -41,7 +39,6 @@ export const FormStudent = ({ userData }) => {
             required
           />
         </div>
-
         <div className='col-11 col-md-8'>
           <label htmlFor='age' className='form-label fw-bold'>
             Edad
@@ -57,7 +54,6 @@ export const FormStudent = ({ userData }) => {
             required
           />
         </div>
-
         <div className='col-11 col-md-8'>
           <label htmlFor='id' className='form-label fw-bold'>
             Documento de identidad
@@ -71,27 +67,10 @@ export const FormStudent = ({ userData }) => {
             placeholder='Escribe tu número de documento'
           />
         </div>
-
-        <div className='col-11 col-md-8'>
-          <label htmlFor='emailInput' className='form-label fw-bold'>
-            Correo electrónico
-          </label>
-          <input
-            type='email'
-            className='form-control'
-            name='emailInput'
-            id='emailInput'
-            value={userData && userData.mail}
-            placeholder='Escribe tu email'
-            required
-          />
-        </div>
-
         <div className='col-11 col-md-8'>
           <label htmlFor='grade' className='form-label fw-bold'>
             Grado
           </label>
-          ;
           <select
             class='form-select'
             name='gadre'
@@ -108,7 +87,36 @@ export const FormStudent = ({ userData }) => {
             <option value='5'>Quinto</option>
           </select>
         </div>
+        <div className='col-11 col-md-8'>
+          <label htmlFor='emailInput' className='form-label fw-bold'>
+            Correo electrónico
+          </label>
+          <input
+            type='email'
+            className='form-control'
+            name='emailInput'
+            id='emailInput'
+            value={userData && userData.mail}
+            pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
+            placeholder='Escribe tu email'
+            required
+          />
+        </div>
 
+        <div className='col-11 col-md-8'>
+          <label htmlFor='password' className='form-label fw-bold'>
+            Contraseña
+          </label>
+          <input
+            type='password'
+            className='form-control'
+            name='password'
+            id='password'
+            value={userData && userData.password}
+            placeholder='Escribe tu contraseña'
+            required
+          />
+        </div>
         <div className='d-grid col-12 mt-4 mb-4'>
           <button type='submit' className='btn btn-primary mx-auto'>
             Subir Información
