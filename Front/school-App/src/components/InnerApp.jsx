@@ -1,6 +1,10 @@
 import useUserInfo from '../hooks/useUserInfo'
+import { FormStudent } from './FormStudent'
+import { ListPendingDocuments } from './ListPendingDocuments'
+import { ListStudents } from './ListStudents'
 import { Menu } from './Menu'
 import { UploadDocument } from './UploadDocument'
+import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
 
 export const InnerApp = ({ loginState }) => {
   const { userInfo } = useUserInfo({})
@@ -8,7 +12,11 @@ export const InnerApp = ({ loginState }) => {
   return (
     <>
       <Menu logOut={loginState} rol={1 /* userInfo.id_rol */} />
+      <ListPendingDocuments />
+      <FormStudent />
       <UploadDocument />
+      <ListStudents />
+      <ValidationDocumentsStudent />
     </>
   )
 }

@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button'
+
 export const UploadDocument = ({ documentList }) => {
   return (
     <div className='container' style={{ marginTop: '100px' }}>
@@ -58,14 +60,10 @@ export const UploadDocument = ({ documentList }) => {
         </label>
       </div>
 
-      <div className='d-grid mt-3'>
-        <button
-          type='submit'
-          className='btn btn-primary mx-auto'
-          form='formulario-cargar-archivos'
-        >
-          Cargar
-        </button>
+      <div className='d-flex justify-content-center mt-3'>
+        <Button variant='primary' onClick=''>
+          Subir documentos
+        </Button>
       </div>
     </div>
   )
