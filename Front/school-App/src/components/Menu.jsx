@@ -1,7 +1,7 @@
 export const Menu = ({ logOut, rol }) => {
   return (
-    <div classNameName='container-fluid p-0'>
-      <nav className='navbar navbar-expand-lg navbar-ligth bg-ligth border-3 border-bottom border-primary fixed-top'>
+    <div className='container-fluid p-0'>
+      <nav className='navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
         <div className='container-fluid'>
           <a href='#' className='navbar-brand'>
             SRDM
@@ -40,46 +40,49 @@ export const Menu = ({ logOut, rol }) => {
                     </a>
                   </li>
                   <li>
-                    <a className='dropdown-item' href=''>
+                    <a className='dropdown-item' href='#'>
                       Ver Documentos Pendientes
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle'
-                  href='#'
-                  role='button'
-                  data-bs-toggle='dropdown'
-                >
-                  Herramientas de verificación y matricula
-                </a>
-                <ul className='dropdown-menu'>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Crear Nuevo estudiante
-                    </a>
-                  </li>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Verificación de Documentos
-                    </a>
-                  </li>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Matricular
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {rol === 1 && (
+                <li className='nav-item dropdown'>
+                  <a
+                    className='nav-link dropdown-toggle'
+                    href='#'
+                    role='button'
+                    data-bs-toggle='dropdown'
+                  >
+                    Herramientas de verificación y matricula
+                  </a>
+                  <ul className='dropdown-menu'>
+                    <li>
+                      <a className='dropdown-item' href='#'>
+                        Crear Nuevo estudiante
+                      </a>
+                    </li>
+                    <li>
+                      <a className='dropdown-item' href='#'>
+                        Verificación de Documentos
+                      </a>
+                    </li>
+                    <li>
+                      <a className='dropdown-item' href='#'>
+                        Matricular
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              )}
             </ul>
 
             <ul className='navbar-nav ms-3'>
               <li className='nav-item position-absolute top-0 end-0'>
                 <a
                   className='nav-link text-nowrap'
+                  href='#'
                   onClick={() => logOut('cerrar')}
                 >
                   Cerrar Sesión
