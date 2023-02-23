@@ -4,9 +4,23 @@ from fastapi.staticfiles import StaticFiles
 from routers import user, authentication_users
 from config.db import get_db
 from schema.user_schema import UserSchema
+from fastapi.middleware.cors import CORSMiddleware 
 
 app= FastAPI()
 app.mount("/static", StaticFiles(directory="./public/static"), name="static")
+
+origins = [
+    "http://localhost",
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 #Routers
 app.include_router(user.user)

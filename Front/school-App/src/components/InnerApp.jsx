@@ -11,10 +11,10 @@ export const InnerApp = ({ loginState }) => {
 
   return (
     <>
-      <Menu logOut={loginState} rol={1 /* userInfo.id_rol */} />
-      <ListPendingDocuments />
+      <Menu logOut={loginState} rol={userInfo.id_rol} />
       <FormStudent />
       <UploadDocument />
+      <ListPendingDocuments />
       <ListStudents />
       <ValidationDocumentsStudent />
     </>

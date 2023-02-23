@@ -21,7 +21,7 @@ export const FormStudent = ({ userData }) => {
             name='name'
             id='name'
             value={userData && userData.firstName}
-            placeholder='Escribe tu Nombre'
+            placeholder='Pedro'
             required
           />
         </div>
@@ -35,7 +35,7 @@ export const FormStudent = ({ userData }) => {
             name='surname'
             id='surname'
             value={userData && userData.lastName}
-            placeholder='Escribe tus Apellidos'
+            placeholder='Garcia'
             required
           />
         </div>
@@ -49,6 +49,7 @@ export const FormStudent = ({ userData }) => {
             name='age'
             id='age'
             value={userData && userData.age}
+            placeholder='6'
             min='1'
             max='19'
             required
@@ -64,7 +65,7 @@ export const FormStudent = ({ userData }) => {
             name='id'
             id='id'
             value={userData && userData.birthDate}
-            placeholder='Escribe tu número de documento'
+            placeholder='11123445656767'
           />
         </div>
         <div className='col-11 col-md-8'>
@@ -98,7 +99,7 @@ export const FormStudent = ({ userData }) => {
             id='emailInput'
             value={userData && userData.mail}
             pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
-            placeholder='Escribe tu email'
+            placeholder='pedro@gmail.co'
             required
           />
         </div>
@@ -113,8 +114,7 @@ export const FormStudent = ({ userData }) => {
             name='password'
             id='password'
             value={userData && userData.password}
-            placeholder='Escribe tu contraseña'
-            required
+            placeholder='Escribe tu nueva contraseña'
           />
         </div>
         <div className='d-grid col-12 mt-4 mb-4'>
