@@ -1,4 +1,4 @@
-const urlLogin = 'http://127.0.0.1:8000/login/'
+import { URL_LOGIN } from '../assets/endpoints/login'
 
 export async function login ({ event, email, password }) {
   event.preventDefault()
@@ -12,7 +12,7 @@ export async function login ({ event, email, password }) {
 
   const bodyContent = `username=${email}&password=${password}`
   try {
-    const response = await fetch(urlLogin, {
+    const response = await fetch(URL_LOGIN, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: bodyContent

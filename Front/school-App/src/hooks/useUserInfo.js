@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-
-const URL_GET_USER_INFO = 'http://127.0.0.1:8000/login/me'
+import { URL_GET_USER_INFO } from '../assets/endpoints/login'
 
 const useUserInfo = () => {
   const [userInfo, setUserInfo] = useState({})
