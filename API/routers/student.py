@@ -27,7 +27,10 @@ async def read_students(user: UserSchema= Depends(current_user) ,db: Session =De
     students= db.query(EstudianteDB).all()
     return students
 
-
-
+@student.get("/{correo}", response_model= StudentDBSchema)
+async def get_student(correo: str, user: UserSchema= Depends(current_user) ,db: Session =Depends(get_db)):
+    if user.id_rol!=1:
+        correo= user.Usuario
+    return await search_student(correo,db)
 
 
