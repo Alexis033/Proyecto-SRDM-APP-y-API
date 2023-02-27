@@ -12,3 +12,15 @@ class StudentDBSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class StudentUpdatechema(BaseModel):
+    id_curso: int | None
+    correo : str | None
+    nombres : str | None
+    apellidos : str | None
+    documento_identidad : int | None
+    edad : int | None
+    telefono : int | None
+
+    class Config:
+        orm_mode = True
