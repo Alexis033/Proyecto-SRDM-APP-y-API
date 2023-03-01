@@ -56,8 +56,12 @@ export const ListStudents = ({ listStudents }) => {
         </div>
       </div>
       <div class='d-grid m-3'>
-        <button type='button' class='btn btn-primary mx-auto'>
+        <button type='button' class='btn btn-primary mx-auto mb-4'>
           Matricular
+        </button>
+
+        <button type='button' class='btn btn-primary mx-auto'>
+          Eliminar
         </button>
       </div>
     </div>
