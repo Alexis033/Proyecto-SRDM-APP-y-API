@@ -30,7 +30,7 @@ async def read_students(user: UserSchema= Depends(current_user) ,db: Session =De
 @student.get("/{correo}", response_model= StudentDBSchema)
 async def get_student(correo: str, user: UserSchema= Depends(current_user) ,db: Session =Depends(get_db)):
     if user.id_rol!=1:
-        correo= user.Usuario
+        correo= user.usuario
     return await search_student(correo,db)
 
 @student.post("/", response_model= StudentDBSchema, status_code=status.HTTP_201_CREATED)
@@ -50,7 +50,7 @@ async def create_student(data_student: StudentDBSchema, db: Session =Depends(get
 @student.put("/update/{correo}", response_model= StudentDBSchema)
 async def create_student(correo: str, new_data_student: StudentUpdatechema, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
     if user.id_rol!=1:
-        correo= user.Usuario
+        correo= user.usuario
     student_db=await search_student(correo,db)
     for key, value in vars(new_data_student).items():
         if value != None:

@@ -34,10 +34,10 @@ async def create_user(data_user: UserDBSchema, db: Session =Depends(get_db), use
     if user.id_rol!=1:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no autorizado")
     new_user= data_user.dict()
-    user_verification= db.query(UsuarioDB).filter(UsuarioDB.Usuario==new_user["Usuario"]).first()
+    user_verification= db.query(UsuarioDB).filter(UsuarioDB.usuario==new_user["usuario"]).first()
     if user_verification:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Usuario ya existe")
-    new_user["Password"]=crypt.hash(data_user.Password)
+    new_user["password"]=crypt.hash(data_user.password)
     user_db = UsuarioDB(**new_user)
     db.add(user_db)
     db.commit()
@@ -53,12 +53,12 @@ async def update_user(id: int, new_data_user: UserUpdateSchema, db: Session =Dep
     user_db = db.get(UsuarioDB, id)
     if not user_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-    if new_data_user.Usuario != None:
-        user_db.Usuario= new_data_user.Usuario
-    if new_data_user.Password != None:
-        user_db.Password= crypt.hash(new_data_user.Password)
-    if new_data_user.Estado != None:
-        user_db.Estado= new_data_user.Estado
+    if new_data_user.usuario != None:
+        user_db.usuario= new_data_user.usuario
+    if new_data_user.password != None:
+        user_db.password= crypt.hash(new_data_user.password)
+    if new_data_user.estado != None:
+        user_db.estado= new_data_user.estado
     db.commit()
     db.refresh(user_db)
     return user_db
@@ -66,10 +66,10 @@ async def update_user(id: int, new_data_user: UserUpdateSchema, db: Session =Dep
 @user.put("/password", response_model= UserSchema)
 async def update_my_password(new_password: MyPasswordUpdateSchema, db: Session =Depends(get_db), 
                             user: UserSchema= Depends(current_user)):
-    user_db=db.query(UsuarioDB).filter(UsuarioDB.Usuario==user.Usuario).first()
+    user_db=db.query(UsuarioDB).filter(UsuarioDB.usuario==user.usuario).first()
     if not user_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-    user_db.Password= crypt.hash(new_password.Password)
+    user_db.password= crypt.hash(new_password.password)
     db.commit()
     db.refresh(user_db)
     return user_db

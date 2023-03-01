@@ -22,7 +22,7 @@ crypt= CryptContext(schemes=["bcrypt"])
 
 
 async def search_user(usuario: str, db: Session =Depends(get_db)):    
-    user = db.query(UsuarioDB).filter(UsuarioDB.Usuario == usuario).first()
+    user = db.query(UsuarioDB).filter(UsuarioDB.usuario == usuario).first()
     if user:
         return user
     else:
@@ -46,7 +46,7 @@ async def auth_user(token: str = Depends(oauth2), db: Session =Depends(get_db)):
     return user
 
 async def current_user(user: UserSchema= Depends(auth_user)): 
-    if user.Estado==0:
+    if user.estado==0:
         raise HTTPException(
             status_code= status.HTTP_401_UNAUTHORIZED,
             detail=f"Usuario no autorizado", 
@@ -56,9 +56,9 @@ async def current_user(user: UserSchema= Depends(auth_user)):
 @authentication.post("/")
 async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user_db: UsuarioDB= await search_user(form.username, db)
-    if not crypt.verify(form.password, user_db.Password):
+    if not crypt.verify(form.password, user_db.password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-    access_token= { "sub":user_db.Usuario,
+    access_token= { "sub":user_db.usuario,
                     "exp": datetime.utcnow() + timedelta(minutes= ACCESS_TOKEN_DURATION) }
 
     return{"access_token": jwt.encode(access_token, SECRET_KEY, algorithm=ALGORITHM) , "token_type":"bearer"}
