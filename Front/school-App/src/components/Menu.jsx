@@ -65,7 +65,7 @@ export const Menu = ({ logOut, rol }) => {
                     </li>
                     <li>
                       <a className='dropdown-item' href='#'>
-                        Verificación de Documentos y matricula
+                        Lista de alumnos
                       </a>
                     </li>
                   </ul>
