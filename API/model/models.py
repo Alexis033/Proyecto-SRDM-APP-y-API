@@ -58,7 +58,7 @@ class DocumentoDB(Base):
     id = Column("id", Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
     id_estudiante = Column("id_estudiante", Integer, nullable=False)
     id_lista_documentos = Column("id_lista_documentos", Integer, nullable=False)
-    estado = Column("estado", String(50), nullable=False)
+    estado = Column("estado", Integer, nullable=False, default=1)
     url_documento = Column("url_documento", Text, nullable=False)
 
 class MatriculaDB(Base):
