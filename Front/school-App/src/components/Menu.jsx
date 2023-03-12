@@ -1,9 +1,13 @@
-export const Menu = ({ logOut, rol }) => {
+export const Menu = ({ logOut, rol, handleClick }) => {
   return (
     <div className='container-fluid p-0'>
       <nav className='navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
         <div className='container-fluid'>
-          <a href='#' className='navbar-brand'>
+          <a
+            href='#'
+            className='navbar-brand'
+            onClick={() => handleClick('Home')}
+          >
             SRDM
           </a>
           <button
@@ -19,33 +23,37 @@ export const Menu = ({ logOut, rol }) => {
             className='collapse navbar-collapse position-relative'
           >
             <ul className='navbar-nav ms-3'>
-              <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='#'>
-                  Información personal
-                </a>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle'
-                  href='#'
-                  role='button'
-                  data-bs-toggle='dropdown'
-                >
-                  Subir Documentos
-                </a>
-                <ul className='dropdown-menu'>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Cargar Documentos
+              {rol === 2 && (
+                <>
+                  <li className='nav-item'>
+                    <a className='nav-link' aria-current='page' href='#'>
+                      Información personal
                     </a>
                   </li>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Ver Documentos Pendientes
+                  <li className='nav-item dropdown'>
+                    <a
+                      className='nav-link dropdown-toggle'
+                      href='#'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                    >
+                      Subir Documentos
                     </a>
+                    <ul className='dropdown-menu'>
+                      <li>
+                        <a className='dropdown-item' href='#'>
+                          Cargar Documentos
+                        </a>
+                      </li>
+                      <li>
+                        <a className='dropdown-item' href='#'>
+                          Ver Documentos Pendientes
+                        </a>
+                      </li>
+                    </ul>
                   </li>
-                </ul>
-              </li>
+                </>
+              )}
 
               {rol === 1 && (
                 <li className='nav-item dropdown'>
@@ -59,7 +67,11 @@ export const Menu = ({ logOut, rol }) => {
                   </a>
                   <ul className='dropdown-menu'>
                     <li>
-                      <a className='dropdown-item' href='#'>
+                      <a
+                        className='dropdown-item'
+                        href='#'
+                        onClick={() => handleClick('pepe')}
+                      >
                         Crear Nuevo estudiante
                       </a>
                     </li>
@@ -78,7 +90,10 @@ export const Menu = ({ logOut, rol }) => {
                 <a
                   className='nav-link text-nowrap'
                   href='#'
-                  onClick={() => logOut('cerrar')}
+                  onClick={() => {
+                    logOut('cerrar')
+                    window.localStorage.removeItem('token')
+                  }}
                 >
                   Cerrar Sesión
                 </a>

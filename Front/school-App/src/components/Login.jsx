@@ -2,17 +2,19 @@ import { useState } from 'react'
 import { login } from '../logic/login'
 import { ModalStatic } from './ModalStatic'
 import './Login.css'
+import { useShowModal } from '../hooks/useShowModal'
 
 export const Login = ({ loginState }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const { show, handleShow, handleClose } = useShowModal()
 
-  const [show, setShow] = useState(false)
-  const handleClose = () => {
-    setShow(false)
-  }
-  const handleShow = () => setShow(true)
+  // const [show, setShow] = useState(false)
+  // const handleClose = () => {
+  //   setShow(false)
+  // }
+  // const handleShow = () => setShow(true)
 
   return (
     <>

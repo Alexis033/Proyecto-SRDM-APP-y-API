@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { URL_GET_USER_INFO } from '../assets/endpoints/login'
+import { URL_GET_USER_INFO } from '../assets/endpoints/appi'
 
 const useUserInfo = () => {
   const [userInfo, setUserInfo] = useState({})
+  const [error, setError] = useState('')
 
   useEffect(() => {
     async function getUserInfo () {
@@ -21,14 +22,14 @@ const useUserInfo = () => {
         const data = await response.json()
         setUserInfo(data)
       } catch (err) {
-        console.log(err)
+        setError(err)
       }
     }
 
     getUserInfo()
   }, [])
 
-  return { userInfo }
+  return { userInfo, error }
 }
 
 export default useUserInfo

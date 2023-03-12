@@ -1,4 +1,12 @@
+import { createUser } from '../logic/createUser'
 export const FormStudent = ({ userData }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const { name, surname, age, id, grade, email, password } =
+      Object.fromEntries(new window.FormData(event.target))
+
+    createUser({ email, password })
+  }
   return (
     <main
       className='container w-75 rounded shadow'
@@ -7,6 +15,7 @@ export const FormStudent = ({ userData }) => {
       <form
         className='row g-3 justify-content-center'
         id='formulario-información-estudiante'
+        onSubmit={handleSubmit}
       >
         <div className='border-top border-bottom border-primary border-3 mt-0 bg-'>
           <h3 className='fw-bold text-center'>Información Estudiante</h3>
@@ -21,7 +30,6 @@ export const FormStudent = ({ userData }) => {
             name='name'
             id='name'
             value={userData && userData.firstName}
-            placeholder='Pedro'
             required
           />
         </div>
@@ -35,7 +43,6 @@ export const FormStudent = ({ userData }) => {
             name='surname'
             id='surname'
             value={userData && userData.lastName}
-            placeholder='Garcia'
             required
           />
         </div>
@@ -49,7 +56,6 @@ export const FormStudent = ({ userData }) => {
             name='age'
             id='age'
             value={userData && userData.age}
-            placeholder='6'
             min='1'
             max='19'
             required
@@ -65,7 +71,6 @@ export const FormStudent = ({ userData }) => {
             name='id'
             id='id'
             value={userData && userData.birthDate}
-            placeholder='11123445656767'
           />
         </div>
         <div className='col-11 col-md-8'>
@@ -73,12 +78,13 @@ export const FormStudent = ({ userData }) => {
             Grado
           </label>
           <select
-            class='form-select'
-            name='gadre'
-            id='gadre'
+            className='form-select'
+            name='grade'
+            id='grade'
             aria-label='Default select example'
+            defaultValue='0'
           >
-            <option selected disabled>
+            <option disabled value='0'>
               Selecciona el grado
             </option>
             <option value='1'>Primero</option>
@@ -89,17 +95,16 @@ export const FormStudent = ({ userData }) => {
           </select>
         </div>
         <div className='col-11 col-md-8'>
-          <label htmlFor='emailInput' className='form-label fw-bold'>
+          <label htmlFor='email' className='form-label fw-bold'>
             Correo electrónico
           </label>
           <input
             type='email'
             className='form-control'
-            name='emailInput'
-            id='emailInput'
+            name='email'
+            id='email'
             value={userData && userData.mail}
             pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
-            placeholder='pedro@gmail.co'
             required
           />
         </div>
@@ -114,7 +119,6 @@ export const FormStudent = ({ userData }) => {
             name='password'
             id='password'
             value={userData && userData.password}
-            placeholder='Escribe tu nueva contraseña'
           />
         </div>
         <div className='d-grid col-12 mt-4 mb-4'>

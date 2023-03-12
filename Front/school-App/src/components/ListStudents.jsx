@@ -1,10 +1,10 @@
 export const ListStudents = ({ listStudents }) => {
   return (
-    <div class='container' style={{ marginTop: '100px' }}>
-      <div class='row'>
-        <div class='col col-md-9 mx-auto'>
-          <table class='table table-hover border border-5 align-middle'>
-            <thead class='table-primary'>
+    <div className='container' style={{ marginTop: '100px' }}>
+      <div className='row'>
+        <div className='col col-md-9 mx-auto'>
+          <table className='table table-hover border border-5 align-middle'>
+            <thead className='table-primary'>
               <tr>
                 <th />
                 <th>Id</th>
@@ -19,7 +19,7 @@ export const ListStudents = ({ listStudents }) => {
                 </td>
                 <td>1</td>
                 <td>
-                  <a class='text-decoration-none text-dark' href=''>
+                  <a className='text-decoration-none text-dark' href=''>
                     Estudiante 1
                   </a>
                 </td>
@@ -32,7 +32,7 @@ export const ListStudents = ({ listStudents }) => {
                 </td>
                 <td>2</td>
                 <td>
-                  <a class='text-decoration-none text-dark' href=''>
+                  <a className='text-decoration-none text-dark' href=''>
                     Estudiante 2
                   </a>
                 </td>
@@ -45,7 +45,7 @@ export const ListStudents = ({ listStudents }) => {
                 </td>
                 <td>3</td>
                 <td>
-                  <a class='text-decoration-none text-dark' href=''>
+                  <a className='text-decoration-none text-dark' href=''>
                     Estudiante 3
                   </a>
                 </td>
@@ -55,12 +55,12 @@ export const ListStudents = ({ listStudents }) => {
           </table>
         </div>
       </div>
-      <div class='d-grid m-3'>
-        <button type='button' class='btn btn-primary mx-auto mb-4'>
+      <div className='d-grid m-3'>
+        <button type='button' className='btn btn-primary mx-auto mb-4'>
           Matricular
         </button>
 
-        <button type='button' class='btn btn-primary mx-auto'>
+        <button type='button' className='btn btn-primary mx-auto'>
           Eliminar
         </button>
       </div>
