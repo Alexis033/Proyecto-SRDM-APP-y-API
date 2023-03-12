@@ -10,7 +10,7 @@ export async function createUser ({ email, password }) {
       'Content-Type': 'application/json'
     }
     const body = {
-      usuario: `${email}`,
+      usuario: email,
       password: `${password}`
     }
 

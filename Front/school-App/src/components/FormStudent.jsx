@@ -1,11 +1,28 @@
+import { createStudent } from '../logic/createStudent'
 import { createUser } from '../logic/createUser'
 export const FormStudent = ({ userData }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    const { name, surname, age, id, grade, email, password } =
-      Object.fromEntries(new window.FormData(event.target))
-
-    createUser({ email, password })
+    const {
+      name,
+      surname,
+      age,
+      documentId,
+      telNumber,
+      grade,
+      email,
+      password
+    } = Object.fromEntries(new window.FormData(event.target))
+    const newUser = createUser({ email, password })
+    const newStudent = createStudent({
+      name,
+      surname,
+      age,
+      documentId,
+      grade,
+      email,
+      telNumber
+    })
   }
   return (
     <main
@@ -62,15 +79,15 @@ export const FormStudent = ({ userData }) => {
           />
         </div>
         <div className='col-11 col-md-8'>
-          <label htmlFor='id' className='form-label fw-bold'>
+          <label htmlFor='document-id' className='form-label fw-bold'>
             Documento de identidad
           </label>
           <input
             type='number'
             className='form-control'
-            name='id'
-            id='id'
-            value={userData && userData.birthDate}
+            name='documentId'
+            id='documentId'
+            value={userData && userData.documentId}
           />
         </div>
         <div className='col-11 col-md-8'>
@@ -106,9 +123,22 @@ export const FormStudent = ({ userData }) => {
             value={userData && userData.mail}
             pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
             required
+            autoComplete='off'
           />
         </div>
-
+        <div className='col-11 col-md-8'>
+          <label htmlFor='telNumber' className='form-label fw-bold'>
+            Número celular
+          </label>
+          <input
+            type='tel'
+            className='form-control'
+            name='telNumber'
+            id='telNumber'
+            value={userData && userData.telNumber}
+            pattern='^[0-9]{10}$'
+          />
+        </div>
         <div className='col-11 col-md-8'>
           <label htmlFor='password' className='form-label fw-bold'>
             Contraseña
@@ -119,6 +149,7 @@ export const FormStudent = ({ userData }) => {
             name='password'
             id='password'
             value={userData && userData.password}
+            autoComplete='off'
           />
         </div>
         <div className='d-grid col-12 mt-4 mb-4'>
