@@ -1,7 +1,7 @@
 export const Menu = ({ logOut, rol, handleClick }) => {
   return (
     <div className='container-fluid p-0'>
-      <nav className='navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
+      <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
         <div className='container-fluid'>
           <a
             href='#'
@@ -92,7 +92,6 @@ export const Menu = ({ logOut, rol, handleClick }) => {
                   href='#'
                   onClick={() => {
                     logOut('cerrar')
-                    window.localStorage.removeItem('token')
                   }}
                 >
                   Cerrar Sesión

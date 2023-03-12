@@ -1,14 +1,7 @@
 import { URL_STUDENT } from '../assets/endpoints/appi'
 
-export async function createStudent ({
-  name,
-  surname,
-  age,
-  documentId,
-  grade,
-  email,
-  telNumber
-}) {
+export async function createStudent ({ formData }) {
+  const { name, surname, age, documentId, grade, email, telNumber } = formData
   const token = window.localStorage.getItem('token')
   const headerList = {
     accept: 'application/json',

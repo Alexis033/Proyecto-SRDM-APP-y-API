@@ -18,8 +18,10 @@ const useUserInfo = () => {
           method: 'GET',
           headers: headersList
         })
-
         const data = await response.json()
+
+        if (!response.ok) setError(data.detail)
+
         setUserInfo(data)
       } catch (err) {
         setError(err)

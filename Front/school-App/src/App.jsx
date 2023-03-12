@@ -1,17 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Login } from './components/Login'
 import { InnerApp } from './components/InnerApp'
+import { useLogin } from './hooks/useLogin'
 
 function App () {
-  const [isLogin, setIsLogin] = useState(false)
-
-  const loginState = (answer) => {
-    if (answer === null) {
-      setIsLogin(true)
-    } else {
-      setIsLogin(false)
-    }
-  }
+  const { isLogin, loginState } = useLogin()
   return (
     <>
       {isLogin

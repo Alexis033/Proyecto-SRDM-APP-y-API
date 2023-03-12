@@ -1,6 +1,7 @@
 import { URL_USER } from '../assets/endpoints/appi'
 
-export async function createUser ({ email, password }) {
+export async function createUser ({ formData }) {
+  const { email, password } = formData
   const token = window.localStorage.getItem('token')
 
   try {

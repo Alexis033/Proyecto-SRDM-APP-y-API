@@ -1,28 +1,10 @@
-import { createStudent } from '../logic/createStudent'
-import { createUser } from '../logic/createUser'
+import { createUserAndStudent } from '../logic/createUserAndStudent.js'
+
 export const FormStudent = ({ userData }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    const {
-      name,
-      surname,
-      age,
-      documentId,
-      telNumber,
-      grade,
-      email,
-      password
-    } = Object.fromEntries(new window.FormData(event.target))
-    const newUser = createUser({ email, password })
-    const newStudent = createStudent({
-      name,
-      surname,
-      age,
-      documentId,
-      grade,
-      email,
-      telNumber
-    })
+    const formData = Object.fromEntries(new window.FormData(event.target))
+    const { newUser, newStudent } = createUserAndStudent({ formData })
   }
   return (
     <main
@@ -116,7 +98,7 @@ export const FormStudent = ({ userData }) => {
             Correo electrónico
           </label>
           <input
-            type='email'
+            type='text'
             className='form-control'
             name='email'
             id='email'

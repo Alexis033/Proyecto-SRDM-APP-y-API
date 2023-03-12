@@ -10,12 +10,6 @@ export const Login = ({ loginState }) => {
   const [error, setError] = useState('')
   const { show, handleShow, handleClose } = useShowModal()
 
-  // const [show, setShow] = useState(false)
-  // const handleClose = () => {
-  //   setShow(false)
-  // }
-  // const handleShow = () => setShow(true)
-
   return (
     <>
       <div id='fondo'>
