@@ -28,7 +28,6 @@ export async function createStudent ({ formData }) {
     const student = await response.json()
 
     if (!response.ok) {
-      console.log(student)
       return student
     }
     return student

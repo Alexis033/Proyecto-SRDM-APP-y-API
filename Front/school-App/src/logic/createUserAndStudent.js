@@ -1,8 +1,8 @@
 import { createUser } from './createUser'
 import { createStudent } from './createStudent'
 
-export function createUserAndStudent ({ formData }) {
-  const newUser = createUser({ formData })
-  const newStudent = createStudent({ formData })
+export async function createUserAndStudent ({ formData }) {
+  const newUser = await createUser({ formData })
+  const newStudent = await createStudent({ formData })
   return { newUser, newStudent }
 }

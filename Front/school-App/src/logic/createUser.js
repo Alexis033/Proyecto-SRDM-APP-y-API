@@ -23,7 +23,6 @@ export async function createUser ({ formData }) {
     const user = await response.json()
 
     if (!response.ok) {
-      console.log(user)
       return user
     }
 
