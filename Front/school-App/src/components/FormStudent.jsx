@@ -1,29 +1,10 @@
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
-import { ModalContext } from '../context/modal.jsx'
-import { useContext } from 'react'
+import { useHandleSubmitForm } from '../hooks/useHandleSubmitForm.js'
 
 export const FormStudent = ({ userData, children }) => {
-  const { handleShow, setMessage } = useContext(ModalContext)
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    const formData = Object.fromEntries(new window.FormData(event.target))
-    const { newUser, newStudent } = await createUserAndStudent({ formData })
-
-    if (newStudent.detail || newUser.detail) {
-      setMessage(newStudent.detail || newUser.detail)
-      handleShow()
-    } else {
-      setMessage(
-        `Creado exitosamente nuevo estudiante: ${newStudent.nombres} ${newStudent.apellidos}`
-      )
-      handleShow()
-      const inputElements = event.target.elements
-      for (let i = 0; i < inputElements.length; i++) {
-        inputElements[i].value = ''
-      }
-    }
-  }
+  const { handleSubmit } = useHandleSubmitForm({
+    functionFetch: createUserAndStudent
+  })
   return (
     <main
       className='container w-75 rounded shadow'
@@ -100,6 +81,7 @@ export const FormStudent = ({ userData, children }) => {
             id='grade'
             aria-label='Default select example'
             defaultValue=''
+            required
           >
             <option disabled value=''>
               Selecciona el grado
