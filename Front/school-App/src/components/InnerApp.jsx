@@ -8,19 +8,15 @@ import { FormStudent } from './FormStudent'
 import { WelcomePage } from './WelcomePage'
 import { useState } from 'react'
 
-export const InnerApp = ({ loginState }) => {
+export const InnerApp = () => {
   const { userInfo } = useUserInfo({})
   const [position, setPosition] = useState('Home')
 
   return (
     <>
-      <Menu
-        logOut={loginState}
-        rol={userInfo.id_rol}
-        handleClick={setPosition}
-      />
+      <Menu rol={userInfo.id_rol} handleClick={setPosition} />
       {position === 'Home' && <WelcomePage />}
-      {position === 'pepe' && <FormStudent />}
+      {position === 'pepe' && <FormStudent>Crear</FormStudent>}
     </>
   )
 }

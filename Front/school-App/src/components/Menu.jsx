@@ -1,4 +1,8 @@
-export const Menu = ({ logOut, rol, handleClick }) => {
+import { useContext } from 'react'
+import { LoginContext } from '../context/login'
+
+export const Menu = ({ rol, handleClick }) => {
+  const { loginState } = useContext(LoginContext)
   return (
     <div className='container-fluid p-0'>
       <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
@@ -63,7 +67,7 @@ export const Menu = ({ logOut, rol, handleClick }) => {
                     role='button'
                     data-bs-toggle='dropdown'
                   >
-                    Herramientas de verificación y matricula
+                    Verificación y matricula
                   </a>
                   <ul className='dropdown-menu'>
                     <li>
@@ -91,7 +95,7 @@ export const Menu = ({ logOut, rol, handleClick }) => {
                   className='nav-link text-nowrap'
                   href='#'
                   onClick={() => {
-                    logOut('cerrar')
+                    loginState('cerrar')
                   }}
                 >
                   Cerrar Sesión

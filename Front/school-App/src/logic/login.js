@@ -1,4 +1,4 @@
-import { URL_LOGIN } from '../assets/endpoints/appi.js'
+import { URL_LOGIN } from '../assets/endpoints/api.js'
 
 export async function login ({ event, email, password }) {
   event.preventDefault()

@@ -1,4 +1,4 @@
-import { URL_STUDENT } from '../assets/endpoints/appi'
+import { URL_STUDENT } from '../assets/endpoints/api'
 
 export async function createStudent ({ formData }) {
   const { name, surname, age, documentId, grade, email, telNumber } = formData

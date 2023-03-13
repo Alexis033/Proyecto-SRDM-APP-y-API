@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { URL_GET_USER_INFO } from '../assets/endpoints/appi'
+import { URL_GET_USER_INFO } from '../assets/endpoints/api'
 
 const useUserInfo = () => {
   const [userInfo, setUserInfo] = useState({})

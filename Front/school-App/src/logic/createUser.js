@@ -1,4 +1,4 @@
-import { URL_USER } from '../assets/endpoints/appi'
+import { URL_USER } from '../assets/endpoints/api'
 
 export async function createUser ({ formData }) {
   const { email, password } = formData

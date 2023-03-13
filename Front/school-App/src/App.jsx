@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react'
 import { Login } from './components/Login'
 import { InnerApp } from './components/InnerApp'
-import { useLogin } from './hooks/useLogin'
+import { useContext } from 'react'
+import { LoginContext } from './context/login'
 
 function App () {
-  const { isLogin, loginState } = useLogin()
-  return (
-    <>
-      {isLogin
-        ? (
-          <InnerApp loginState={loginState} />
-          )
-        : (
-          <Login loginState={loginState} />
-          )}
-    </>
-  )
+  // const { isLogin, loginState } = useLogin()
+
+  const { isLogin, loginState } = useContext(LoginContext)
+  return <>{isLogin ? <InnerApp /> : <Login />}</>
 }
 
 export default App

@@ -1,6 +1,6 @@
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
 
-export const FormStudent = ({ userData }) => {
+export const FormStudent = ({ userData, children }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     const formData = Object.fromEntries(new window.FormData(event.target))
@@ -132,11 +132,12 @@ export const FormStudent = ({ userData }) => {
             id='password'
             value={userData && userData.password}
             autoComplete='off'
+            placeholder='Llenar si deseas cambiarla'
           />
         </div>
         <div className='d-grid col-12 mt-4 mb-4'>
           <button type='submit' className='btn btn-primary mx-auto'>
-            Subir Información
+            {children}
           </button>
         </div>
       </form>

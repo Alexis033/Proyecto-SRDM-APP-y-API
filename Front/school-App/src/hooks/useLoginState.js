@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useLogin () {
+export function useLoginState () {
   const [isLogin, setIsLogin] = useState(false)
 
   useEffect(() => {

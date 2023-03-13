@@ -1,14 +1,26 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { login } from '../logic/login'
 import { ModalStatic } from './ModalStatic'
 import './Login.css'
 import { useShowModal } from '../hooks/useShowModal'
+import { LoginContext } from '../context/login'
 
-export const Login = ({ loginState }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export const Login = () => {
   const [error, setError] = useState('')
   const { show, handleShow, handleClose } = useShowModal()
+
+  const { loginState } = useContext(LoginContext)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const { email, password } = Object.fromEntries(
+      new window.FormData(event.target)
+    )
+    const answer = await login({ event, email, password })
+    loginState(answer)
+    setError(answer)
+    if (answer !== null) handleShow()
+  }
 
   return (
     <>
@@ -35,12 +47,7 @@ export const Login = ({ loginState }) => {
                 id='login'
                 method='post'
                 autoComplete='off'
-                onSubmit={async (event) => {
-                  const answer = await login({ event, email, password })
-                  loginState(answer)
-                  setError(answer)
-                  if (answer !== null) handleShow()
-                }}
+                onSubmit={handleSubmit}
               >
                 <div className='mb-4'>
                   <label htmlFor='email' className='form-label'>
@@ -54,8 +61,6 @@ export const Login = ({ loginState }) => {
                     required
                     autoComplete='off'
                     pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
                 <div className='mb-4'>
@@ -69,8 +74,6 @@ export const Login = ({ loginState }) => {
                     name='password'
                     required
                     autoComplete='off'
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
                 <div className='mb-1 form-check' />
