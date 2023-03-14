@@ -74,13 +74,17 @@ export const Menu = ({ rol, handleClick }) => {
                       <a
                         className='dropdown-item'
                         href='#'
-                        onClick={() => handleClick('pepe')}
+                        onClick={() => handleClick('createStudent')}
                       >
                         Crear Nuevo estudiante
                       </a>
                     </li>
                     <li>
-                      <a className='dropdown-item' href='#'>
+                      <a
+                        className='dropdown-item'
+                        href='#'
+                        onClick={() => handleClick('listStudents')}
+                      >
                         Lista de alumnos
                       </a>
                     </li>

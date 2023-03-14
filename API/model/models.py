@@ -47,6 +47,7 @@ class EstudianteDB(Base):
     documento_identidad = Column("documento_identidad", Integer, nullable=False)
     edad = Column("edad", Integer)
     telefono = Column("telefono", Integer)
+    estado = Column("estado", String(45))
 
 class ListaDocumentosDB(Base):
     __tablename__= "lista_documentos"
