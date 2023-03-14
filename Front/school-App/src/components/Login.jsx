@@ -29,7 +29,7 @@ export const Login = () => {
           <div className='row align-items-stretch'>
             <div
               id='image-container'
-              className='col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-start'
+              className='col bg d-none d-md-block col-md-5 col-lg-5 col-xl-6 rounded-start'
             />
             <div className='col bg-white rounded-end'>
               <div className='text-end mt-2'>
@@ -45,11 +45,12 @@ export const Login = () => {
 
               <form
                 id='login'
+                className='row flex-column'
                 method='post'
                 autoComplete='off'
                 onSubmit={handleSubmit}
               >
-                <div className='mb-4'>
+                <div className='col mb-3'>
                   <label htmlFor='email' className='form-label'>
                     Correo electrónico
                   </label>
@@ -63,7 +64,7 @@ export const Login = () => {
                     pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
                   />
                 </div>
-                <div className='mb-4'>
+                <div className='col mb-5'>
                   <label htmlFor='password' className='form-label'>
                     Contraseña
                   </label>
@@ -76,9 +77,8 @@ export const Login = () => {
                     autoComplete='off'
                   />
                 </div>
-                <div className='mb-1 form-check' />
 
-                <div className='d-grid mb-4'>
+                <div className='col-sm-7 mx-auto mb-5 d-flex justify-content-center '>
                   <button
                     type='submit'
                     id='btn-session'
