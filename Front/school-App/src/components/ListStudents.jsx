@@ -1,41 +1,22 @@
-import { useEffect, useState } from 'react'
-import { getStudents } from '../logic/getStudents'
+import { useGetStudents } from '../hooks/useGetStudents'
+import { usePagination } from '../hooks/usePagination'
+import { useSearchStudent } from '../hooks/useSearchStudent'
 import { Pagination } from './Pagination'
 import { SearchBar } from './SearchBar'
 
 export const ListStudents = () => {
-  const [listStudents, setListStudents] = useState([])
-  const [studentSearch, setStudentSearch] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const studentsPerPage = 2
+  const studentsPerPage = 20
 
-  useEffect(() => {
-    async function fetchData () {
-      const listStudents = await getStudents()
-      if (!listStudents.detail) setListStudents(listStudents)
-    }
-    fetchData()
-  }, [])
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage)
-  }
-
-  const handleSearch = (mail) => {
-    const student = listStudents.find((student) => {
-      return student.correo === mail
-    })
-    student !== undefined ? setStudentSearch([student]) : setStudentSearch([])
-  }
-
-  const studentsToRender = listStudents.slice(
-    currentPage * studentsPerPage,
-    (currentPage + 1) * studentsPerPage
-  )
+  const { listStudents } = useGetStudents()
+  const { handlePageChange, elementsToRender, currentPage } = usePagination({
+    elementsInPage: studentsPerPage,
+    totalElements: listStudents
+  })
+  const { studentSearch, handleSearch } = useSearchStudent({ listStudents })
 
   const listStudentsToRender = studentSearch.length
     ? studentSearch
-    : studentsToRender
+    : elementsToRender
 
   return (
     <div className='container' style={{ marginTop: '100px' }}>

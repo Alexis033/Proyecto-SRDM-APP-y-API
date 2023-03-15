@@ -1,9 +1,8 @@
-import { createUserAndStudent } from '../logic/createUserAndStudent.js'
 import { useHandleSubmitForm } from '../hooks/useHandleSubmitForm.js'
 
-export const FormStudent = ({ userData, children }) => {
+export const FormStudent = ({ userData, functionFetch, children }) => {
   const { handleSubmit } = useHandleSubmitForm({
-    functionFetch: createUserAndStudent
+    functionFetch
   })
   return (
     <main

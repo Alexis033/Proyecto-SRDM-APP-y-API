@@ -9,6 +9,7 @@ import { WelcomePage } from './WelcomePage'
 import { useContext, useState } from 'react'
 import { ModalContext } from '../context/modal'
 import { ModalStatic } from './ModalStatic'
+import { createUserAndStudent } from '../logic/createUserAndStudent.js'
 
 export const InnerApp = () => {
   const { userInfo } = useUserInfo({})
@@ -19,8 +20,11 @@ export const InnerApp = () => {
     <>
       <Menu rol={userInfo.id_rol} handleClick={setPosition} />
       {position === 'Home' && <WelcomePage />}
-      {position === 'createStudent' && <FormStudent>Crear</FormStudent>}
+      {position === 'createStudent' && (
+        <FormStudent functionFetch={createUserAndStudent}>Crear</FormStudent>
+      )}
       {position === 'listStudents' && <ListStudents />}
+      {position === 'personalInfo' && <FormStudent>Actualizar</FormStudent>}
       <ModalStatic
         title='Información'
         content={message}
