@@ -1,10 +1,6 @@
 import { URL_UPDATE_STUDENT } from '../assets/endpoints/api'
-import { UserContext } from '../context/userInfo'
-import { useContext } from 'react'
 
 export async function updateStudent ({ formData }) {
-  const { userInfo } = useContext(UserContext)
-
   const { name, surname, age, documentId, grade, email, telNumber } = formData
   const token = window.localStorage.getItem('token')
   const headerList = {
@@ -12,7 +8,6 @@ export async function updateStudent ({ formData }) {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
   }
-
   const body = {
     id_curso: parseInt(grade),
     correo: email,
@@ -23,7 +18,7 @@ export async function updateStudent ({ formData }) {
     telefono: parseInt(telNumber)
   }
   try {
-    const response = await fetch(`${URL_UPDATE_STUDENT}${userInfo.usuario}`, {
+    const response = await fetch(`${URL_UPDATE_STUDENT}${email}`, {
       method: 'PUT',
       headers: headerList,
       body: JSON.stringify(body)

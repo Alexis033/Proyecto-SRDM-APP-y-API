@@ -69,7 +69,8 @@ async def update_my_password(new_password: MyPasswordUpdateSchema, db: Session =
     user_db=db.query(UsuarioDB).filter(UsuarioDB.usuario==user.usuario).first()
     if not user_db:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-    user_db.password= crypt.hash(new_password.password)
+    if new_password.password != None :
+        user_db.password= crypt.hash(new_password.password)
     db.commit()
     db.refresh(user_db)
     return user_db

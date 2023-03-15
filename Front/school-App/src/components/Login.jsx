@@ -5,7 +5,7 @@ import './Login.css'
 import { useShowModal } from '../hooks/useShowModal'
 import { LoginContext } from '../context/login'
 import { UserContext } from '../context/userInfo'
-import { useStudentInfo } from '../hooks/useStudentInfo,js'
+import { useStudentInfo } from '../hooks/useStudentInfo.js'
 
 export const Login = () => {
   const [error, setError] = useState('')

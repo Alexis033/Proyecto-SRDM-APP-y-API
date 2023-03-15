@@ -4,30 +4,32 @@ export async function updateUserPassword ({ formData }) {
   const { password } = formData
   const token = window.localStorage.getItem('token')
 
-  try {
-    const headerList = {
-      accept: 'application/json',
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-    const body = {
-      password: `${password}`
-    }
+  if (password !== '') {
+    try {
+      const headerList = {
+        accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+      const body = {
+        password: `${password}`
+      }
 
-    const response = await fetch(URL_UPDATE_USER_PASSWORD, {
-      method: 'PUT',
-      headers: headerList,
-      body: JSON.stringify(body)
-    })
-    const user = await response.json()
+      const response = await fetch(URL_UPDATE_USER_PASSWORD, {
+        method: 'PUT',
+        headers: headerList,
+        body: JSON.stringify(body)
+      })
+      const user = await response.json()
 
-    if (!response.ok) {
+      if (!response.ok) {
+        return user
+      }
+
       return user
+    } catch (err) {
+      console.log(err)
+      return err
     }
-
-    return user
-  } catch (err) {
-    console.log(err)
-    return err
   }
 }

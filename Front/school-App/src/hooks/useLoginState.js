@@ -21,5 +21,5 @@ export function useLoginState () {
       window.localStorage.removeItem('token')
     }
   }
-  return { isLogin, loginState }
+  return { isLogin, loginState, setIsLogin }
 }

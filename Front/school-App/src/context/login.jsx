@@ -3,13 +3,14 @@ import { useLoginState } from '../hooks/useLoginState'
 export const LoginContext = createContext()
 
 export function LoginProvider ({ children }) {
-  const { isLogin, loginState } = useLoginState(false)
+  const { isLogin, loginState, setIsLogin } = useLoginState(false)
 
   return (
     <LoginContext.Provider
       value={{
         isLogin,
-        loginState
+        loginState,
+        setIsLogin
       }}
     >
       {children}

@@ -10,7 +10,7 @@ export function useGetStudents () {
       if (!listStudents.detail) setListStudents(listStudents)
     }
     fetchData()
-  }, [listStudents])
+  }, [])
 
   return { listStudents }
 }

@@ -10,7 +10,8 @@ import { UserContext } from '../context/userInfo'
 import { ModalContext } from '../context/modal'
 import { ModalStatic } from './ModalStatic'
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
-import { useStudentInfo } from '../hooks/useStudentInfo,js'
+import { useStudentInfo } from '../hooks/useStudentInfo.js'
+import { updateUserAndStudent } from '../logic/updateUserAndStudent'
 
 export const InnerApp = () => {
   const { userInfo } = useContext(UserContext)
@@ -29,7 +30,12 @@ export const InnerApp = () => {
       )}
       {position === 'listStudents' && <ListStudents />}
       {position === 'personalInfo' && (
-        <FormStudent userData={studentInfo}>Actualizar</FormStudent>
+        <FormStudent
+          userData={studentInfo}
+          functionFetch={updateUserAndStudent}
+        >
+          Actualizar
+        </FormStudent>
       )}
       <ModalStatic
         title='Información'

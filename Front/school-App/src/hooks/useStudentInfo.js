@@ -1,16 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
-import { URL_GET_USER_INFO } from '../assets/endpoints/api'
+import { URL_STUDENT } from '../assets/endpoints/api'
+import { UserContext } from '../context/userInfo'
 import { LoginContext } from '../context/login'
 
-const useUserInfo = () => {
-  const [userInfo, setUserInfo] = useState({})
+export function useStudentInfo () {
+  const [studentInfo, setStudentInfo] = useState({})
   const [error, setError] = useState('')
-  const { isLogin } = useContext(LoginContext)
-  const [modificationInfo, setModificationInfo] = useState(false)
+  const { isLogin, setIsLogin } = useContext(LoginContext)
+
+  const { userInfo } = useContext(UserContext)
 
   useEffect(() => {
     if (isLogin === true) {
-      async function getUserInfo () {
+      async function getStudentInfo () {
         const token = window.localStorage.getItem('token')
         try {
           const headersList = {
@@ -18,7 +20,7 @@ const useUserInfo = () => {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
 
-          const response = await fetch(URL_GET_USER_INFO, {
+          const response = await fetch(`${URL_STUDENT}${userInfo.usuario}`, {
             method: 'GET',
             headers: headersList
           })
@@ -26,17 +28,17 @@ const useUserInfo = () => {
 
           if (!response.ok) setError(data.detail)
 
-          setUserInfo(data)
+          setStudentInfo(data)
         } catch (err) {
           setError(err)
         }
       }
-
-      getUserInfo()
+      getStudentInfo()
     }
-  }, [isLogin, modificationInfo])
+  }, [isLogin, userInfo])
 
-  return { userInfo, error, setUserInfo, modificationInfo, setModificationInfo }
+  if (studentInfo.detail) {
+    setIsLogin(false)
+  }
+  return { studentInfo, error, setStudentInfo }
 }
-
-export default useUserInfo

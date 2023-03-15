@@ -52,7 +52,6 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='age'
             id='age'
-            valdefaultValue
             defaultValue={userData && userData.edad}
             min='1'
             max='19'
