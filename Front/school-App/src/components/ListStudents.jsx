@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { getStudents } from '../logic/getStudents'
 import { Pagination } from './Pagination'
+import { SearchBar } from './SearchBar'
 
 export const ListStudents = () => {
   const [listStudents, setListStudents] = useState([])
+  const [studentSearch, setStudentSearch] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
-  const studentsPerPage = 20
+  const studentsPerPage = 2
 
   useEffect(() => {
     async function fetchData () {
@@ -19,15 +21,28 @@ export const ListStudents = () => {
     setCurrentPage(newPage)
   }
 
+  const handleSearch = (mail) => {
+    const student = listStudents.find((student) => {
+      return student.correo === mail
+    })
+    student !== undefined ? setStudentSearch([student]) : setStudentSearch([])
+  }
+
   const studentsToRender = listStudents.slice(
     currentPage * studentsPerPage,
     (currentPage + 1) * studentsPerPage
   )
 
+  const listStudentsToRender = studentSearch.length
+    ? studentSearch
+    : studentsToRender
+
   return (
     <div className='container' style={{ marginTop: '100px' }}>
       <div className='row'>
         <div className='col col-md-9 mx-auto'>
+          <h1 className='text-center mx-auto'>Lista de estudiantes</h1>
+          <SearchBar handleSearch={handleSearch} />
           <table className='table table-hover border border-5 align-middle text-center'>
             <thead className='table-primary'>
               <tr>
@@ -39,7 +54,7 @@ export const ListStudents = () => {
               </tr>
             </thead>
             <tbody>
-              {studentsToRender?.map((student) => {
+              {listStudentsToRender?.map((student) => {
                 return (
                   <tr key={student.id}>
                     <td>
