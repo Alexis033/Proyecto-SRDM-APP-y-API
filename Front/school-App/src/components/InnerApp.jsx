@@ -1,4 +1,3 @@
-import useUserInfo from '../hooks/useUserInfo'
 import { Menu } from './Menu'
 import { FormStudent } from './FormStudent'
 // import { ListPendingDocuments } from './ListPendingDocuments'
@@ -7,14 +6,19 @@ import { ListStudents } from './ListStudents'
 // import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
 import { WelcomePage } from './WelcomePage'
 import { useContext, useState } from 'react'
+import { UserContext } from '../context/userInfo'
 import { ModalContext } from '../context/modal'
 import { ModalStatic } from './ModalStatic'
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
+import { useStudentInfo } from '../hooks/useStudentInfo,js'
 
 export const InnerApp = () => {
-  const { userInfo } = useUserInfo({})
+  const { userInfo } = useContext(UserContext)
+  const { studentInfo } = useStudentInfo()
   const [position, setPosition] = useState('Home')
   const { show, handleClose, message } = useContext(ModalContext)
+  console.log(userInfo)
+  console.log(studentInfo)
 
   return (
     <>
@@ -24,7 +28,9 @@ export const InnerApp = () => {
         <FormStudent functionFetch={createUserAndStudent}>Crear</FormStudent>
       )}
       {position === 'listStudents' && <ListStudents />}
-      {position === 'personalInfo' && <FormStudent>Actualizar</FormStudent>}
+      {position === 'personalInfo' && (
+        <FormStudent userData={studentInfo}>Actualizar</FormStudent>
+      )}
       <ModalStatic
         title='Información'
         content={message}

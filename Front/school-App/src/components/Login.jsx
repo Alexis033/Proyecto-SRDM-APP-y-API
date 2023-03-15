@@ -4,15 +4,21 @@ import { ModalStatic } from './ModalStatic'
 import './Login.css'
 import { useShowModal } from '../hooks/useShowModal'
 import { LoginContext } from '../context/login'
+import { UserContext } from '../context/userInfo'
+import { useStudentInfo } from '../hooks/useStudentInfo,js'
 
 export const Login = () => {
   const [error, setError] = useState('')
   const { show, handleShow, handleClose } = useShowModal()
-
   const { loginState } = useContext(LoginContext)
+  const { setUserInfo } = useContext(UserContext)
+  const { setStudentInfo } = useStudentInfo()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setUserInfo({})
+    setStudentInfo({})
+
     const { email, password } = Object.fromEntries(
       new window.FormData(event.target)
     )

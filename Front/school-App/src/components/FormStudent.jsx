@@ -26,7 +26,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='name'
             id='name'
-            value={userData && userData.firstName}
+            defaultValue={userData && userData.nombres}
             required
           />
         </div>
@@ -39,7 +39,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='surname'
             id='surname'
-            value={userData && userData.lastName}
+            defaultValue={userData && userData.apellidos}
             required
           />
         </div>
@@ -52,7 +52,8 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='age'
             id='age'
-            value={userData && userData.age}
+            valdefaultValue
+            defaultValue={userData && userData.edad}
             min='1'
             max='19'
             required
@@ -67,7 +68,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='documentId'
             id='documentId'
-            value={userData && userData.documentId}
+            defaultValue={userData && userData.documento_identidad}
           />
         </div>
         <div className='col-11 col-md-8'>
@@ -79,7 +80,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             name='grade'
             id='grade'
             aria-label='Default select example'
-            defaultValue=''
+            defaultValue={userData ? userData.ide_curso : ''}
             required
           >
             <option disabled value=''>
@@ -101,7 +102,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='email'
             id='email'
-            value={userData && userData.mail}
+            defaultValue={userData && userData.correo}
             pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
             required
             autoComplete='off'
@@ -116,7 +117,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='telNumber'
             id='telNumber'
-            value={userData && userData.telNumber}
+            defaultValue={userData && userData.telefono}
             pattern='^[0-9]{10}$'
           />
         </div>
@@ -129,7 +130,6 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             className='form-control'
             name='password'
             id='password'
-            value={userData && userData.password}
             autoComplete='off'
             placeholder='Llenar si deseas cambiarla'
           />

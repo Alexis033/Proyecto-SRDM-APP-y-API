@@ -1,7 +1,7 @@
-import { URL_USER } from '../assets/endpoints/api'
+import { URL_UPDATE_USER_PASSWORD } from '../assets/endpoints/api'
 
-export async function createUser ({ formData }) {
-  const { email, password } = formData
+export async function updateUserPassword ({ formData }) {
+  const { password } = formData
   const token = window.localStorage.getItem('token')
 
   try {
@@ -11,12 +11,11 @@ export async function createUser ({ formData }) {
       'Content-Type': 'application/json'
     }
     const body = {
-      usuario: email,
       password: `${password}`
     }
 
-    const response = await fetch(URL_USER, {
-      method: 'POST',
+    const response = await fetch(URL_UPDATE_USER_PASSWORD, {
+      method: 'PUT',
       headers: headerList,
       body: JSON.stringify(body)
     })

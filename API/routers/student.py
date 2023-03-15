@@ -48,7 +48,7 @@ async def create_student(data_student: StudentDBSchema, db: Session =Depends(get
     return student_db
 
 @student.put("/update/{correo}", response_model= StudentDBSchema)
-async def create_student(correo: str, new_data_student: StudentUpdatechema, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
+async def update_student(correo: str, new_data_student: StudentUpdatechema, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
     if user.id_rol!=1:
         correo= user.usuario
     student_db=await search_student(correo,db)

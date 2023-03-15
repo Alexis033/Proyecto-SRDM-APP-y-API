@@ -1,6 +1,10 @@
-import { URL_STUDENT } from '../assets/endpoints/api'
+import { URL_UPDATE_STUDENT } from '../assets/endpoints/api'
+import { UserContext } from '../context/userInfo'
+import { useContext } from 'react'
 
-export async function createStudent ({ formData }) {
+export async function updateStudent ({ formData }) {
+  const { userInfo } = useContext(UserContext)
+
   const { name, surname, age, documentId, grade, email, telNumber } = formData
   const token = window.localStorage.getItem('token')
   const headerList = {
@@ -19,8 +23,8 @@ export async function createStudent ({ formData }) {
     telefono: parseInt(telNumber)
   }
   try {
-    const response = await fetch(URL_STUDENT, {
-      method: 'POST',
+    const response = await fetch(`${URL_UPDATE_STUDENT}${userInfo.usuario}`, {
+      method: 'PUT',
       headers: headerList,
       body: JSON.stringify(body)
     })

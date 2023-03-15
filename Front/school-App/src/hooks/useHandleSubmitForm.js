@@ -8,13 +8,15 @@ export function useHandleSubmitForm ({ functionFetch }) {
     event.preventDefault()
     const formData = Object.fromEntries(new window.FormData(event.target))
     const { newStudent } = await functionFetch({ formData })
-
     if (newStudent.detail) {
       setMessage(newStudent.detail)
       handleShow()
+    } else if (newStudent.stack) {
+      setMessage('Error con el servidor')
+      handleShow()
     } else {
       setMessage(
-        `Creado exitosamente nuevo estudiante: ${newStudent.nombres} ${newStudent.apellidos}`
+        `Proceso exitoso para estudiante: ${newStudent.nombres} ${newStudent.apellidos}`
       )
       handleShow()
       const inputElements = event.target.elements
