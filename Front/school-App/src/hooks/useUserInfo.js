@@ -1,14 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
 import { URL_GET_USER_INFO } from '../assets/endpoints/api'
 import { LoginContext } from '../context/login'
+import { UserContext } from '../context/userInfo'
 
-const useUserInfo = () => {
-  const [userInfo, setUserInfo] = useState({})
+export function useUserInfo () {
   const [error, setError] = useState('')
-  const { isLogin } = useContext(LoginContext)
-  const [modificationInfo, setModificationInfo] = useState(false)
+  const { isLogin, setIsLogin } = useContext(LoginContext)
+  const { userInfo, setUserInfo, modificationInfo, setModificationInfo } =
+    useContext(UserContext)
 
+  console.log(modificationInfo)
   useEffect(() => {
+    setModificationInfo(false)
+
     if (isLogin === true) {
       async function getUserInfo () {
         const token = window.localStorage.getItem('token')
@@ -36,7 +40,9 @@ const useUserInfo = () => {
     }
   }, [isLogin, modificationInfo])
 
-  return { userInfo, error, setUserInfo, modificationInfo, setModificationInfo }
-}
+  if (userInfo.detail) {
+    setIsLogin(false)
+  }
 
-export default useUserInfo
+  return { error }
+}

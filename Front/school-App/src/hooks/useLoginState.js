@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import { LoginContext } from '../context/login.jsx'
 
 export function useLoginState () {
-  const [isLogin, setIsLogin] = useState(false)
+  const { isLogin, setIsLogin } = useContext(LoginContext)
 
   useEffect(() => {
     if (isLogin === true) {
@@ -21,5 +22,5 @@ export function useLoginState () {
       window.localStorage.removeItem('token')
     }
   }
-  return { isLogin, loginState, setIsLogin }
+  return { loginState }
 }

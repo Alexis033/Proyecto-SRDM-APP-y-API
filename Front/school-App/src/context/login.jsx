@@ -1,15 +1,13 @@
-import { createContext } from 'react'
-import { useLoginState } from '../hooks/useLoginState'
+import { createContext, useState } from 'react'
 export const LoginContext = createContext()
 
 export function LoginProvider ({ children }) {
-  const { isLogin, loginState, setIsLogin } = useLoginState(false)
+  const [isLogin, setIsLogin] = useState(false)
 
   return (
     <LoginContext.Provider
       value={{
         isLogin,
-        loginState,
         setIsLogin
       }}
     >

@@ -12,10 +12,13 @@ import { ModalStatic } from './ModalStatic'
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
 import { useStudentInfo } from '../hooks/useStudentInfo.js'
 import { updateUserAndStudent } from '../logic/updateUserAndStudent'
+import { useUserInfo } from '../hooks/useUserInfo'
 
 export const InnerApp = () => {
-  const { userInfo } = useContext(UserContext)
-  const { studentInfo } = useStudentInfo()
+  useUserInfo()
+  useStudentInfo()
+
+  const { userInfo, studentInfo } = useContext(UserContext)
   const [position, setPosition] = useState('Home')
   const { show, handleClose, message } = useContext(ModalContext)
   console.log(userInfo)
@@ -23,7 +26,7 @@ export const InnerApp = () => {
 
   return (
     <>
-      <Menu rol={userInfo.id_rol} handleClick={setPosition} />
+      <Menu handleClick={setPosition} />
       {position === 'Home' && <WelcomePage />}
       {position === 'createStudent' && (
         <FormStudent functionFetch={createUserAndStudent}>Crear</FormStudent>

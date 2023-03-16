@@ -4,11 +4,9 @@ import { UserContext } from '../context/userInfo'
 import { LoginContext } from '../context/login'
 
 export function useStudentInfo () {
-  const [studentInfo, setStudentInfo] = useState({})
   const [error, setError] = useState('')
-  const { isLogin, setIsLogin } = useContext(LoginContext)
-
-  const { userInfo } = useContext(UserContext)
+  const { isLogin } = useContext(LoginContext)
+  const { userInfo, setStudentInfo, modificationInfo } = useContext(UserContext)
 
   useEffect(() => {
     if (isLogin === true) {
@@ -35,10 +33,7 @@ export function useStudentInfo () {
       }
       getStudentInfo()
     }
-  }, [isLogin, userInfo])
+  }, [isLogin, userInfo, modificationInfo])
 
-  if (studentInfo.detail) {
-    setIsLogin(false)
-  }
-  return { studentInfo, error, setStudentInfo }
+  return { error }
 }

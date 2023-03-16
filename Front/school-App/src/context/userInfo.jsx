@@ -1,14 +1,22 @@
 import { createContext, useState } from 'react'
-import useUserInfo from '../hooks/useUserInfo'
 
 export const UserContext = createContext()
 
 export function UserProvider ({ children }) {
-  const { userInfo, setUserInfo, modificationInfo, setModificationInfo } =
-    useUserInfo()
+  const [userInfo, setUserInfo] = useState({})
+  const [modificationInfo, setModificationInfo] = useState(false)
+  const [studentInfo, setStudentInfo] = useState({})
+
   return (
     <UserContext.Provider
-      value={{ userInfo, setUserInfo, modificationInfo, setModificationInfo }}
+      value={{
+        userInfo,
+        setUserInfo,
+        modificationInfo,
+        setModificationInfo,
+        studentInfo,
+        setStudentInfo
+      }}
     >
       {children}
     </UserContext.Provider>

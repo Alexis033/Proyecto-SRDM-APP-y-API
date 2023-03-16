@@ -1,10 +1,6 @@
-import { useContext } from 'react'
 import { URL_UPDATE_USER } from '../assets/endpoints/api'
-import { UserContext } from '../context/userInfo'
 
-export async function updateUser ({ formData }) {
-  const { userInfo } = useContext(UserContext)
-
+export async function updateUser ({ formData, userId }) {
   const { email, password } = formData
   const token = window.localStorage.getItem('token')
 
@@ -19,7 +15,7 @@ export async function updateUser ({ formData }) {
       password: `${password}`
     }
 
-    const response = await fetch(`${URL_UPDATE_USER}${userInfo.id}`, {
+    const response = await fetch(`${URL_UPDATE_USER}${userId}`, {
       method: 'PUT',
       headers: headerList,
       body: JSON.stringify(body)

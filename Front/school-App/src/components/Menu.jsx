@@ -1,8 +1,11 @@
+import { useLoginState } from '../hooks/useLoginState'
 import { useContext } from 'react'
-import { LoginContext } from '../context/login'
+import { UserContext } from '../context/userInfo'
 
-export const Menu = ({ rol, handleClick }) => {
-  const { loginState } = useContext(LoginContext)
+export const Menu = ({ handleClick }) => {
+  const { loginState } = useLoginState()
+  const { userInfo } = useContext(UserContext)
+
   return (
     <div className='container-fluid p-0'>
       <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
@@ -27,7 +30,7 @@ export const Menu = ({ rol, handleClick }) => {
             className='collapse navbar-collapse position-relative'
           >
             <ul className='navbar-nav ms-3'>
-              {rol === 2 && (
+              {userInfo.id_rol === 2 && (
                 <>
                   <li className='nav-item'>
                     <a
@@ -64,7 +67,7 @@ export const Menu = ({ rol, handleClick }) => {
                 </>
               )}
 
-              {rol === 1 && (
+              {userInfo.id_rol === 1 && (
                 <li className='nav-item dropdown'>
                   <a
                     className='nav-link dropdown-toggle'

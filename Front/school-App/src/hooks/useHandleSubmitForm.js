@@ -26,7 +26,10 @@ export function useHandleSubmitForm ({ functionFetch }) {
       for (let i = 0; i < inputElements.length; i++) {
         inputElements[i].value = ''
       }
-      setModificationInfo(true)
+
+      setTimeout(() => {
+        setModificationInfo(true)
+      }, 5 * 1000)
     }
   }
   return { handleSubmit }
