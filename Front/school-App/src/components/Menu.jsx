@@ -1,10 +1,9 @@
 import { useLoginState } from '../hooks/useLoginState'
-import { useContext } from 'react'
-import { UserContext } from '../context/userInfo'
+import { useUserContext } from '../hooks/useUserContext'
 
 export const Menu = ({ handleClick }) => {
   const { loginState } = useLoginState()
-  const { userInfo } = useContext(UserContext)
+  const { userInfo } = useUserContext()
 
   return (
     <div className='container-fluid p-0'>

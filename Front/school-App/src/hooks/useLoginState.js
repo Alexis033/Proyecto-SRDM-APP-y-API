@@ -1,8 +1,8 @@
-import { useEffect, useContext } from 'react'
-import { LoginContext } from '../context/login.jsx'
+import { useEffect } from 'react'
+import { useLoginContext } from './useLoginContext'
 
 export function useLoginState () {
-  const { isLogin, setIsLogin } = useContext(LoginContext)
+  const { isLogin, setIsLogin } = useLoginContext()
 
   useEffect(() => {
     if (isLogin === true) {

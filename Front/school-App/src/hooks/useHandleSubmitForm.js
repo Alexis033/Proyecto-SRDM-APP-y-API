@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { ModalContext } from '../context/modal'
-import { UserContext } from '../context/userInfo'
+import { useUserContext } from './useUserContext'
 
 export function useHandleSubmitForm ({ functionFetch }) {
-  const { setModificationInfo } = useContext(UserContext)
+  const { setModificationInfo } = useUserContext()
   const { handleShow, setMessage } = useContext(ModalContext)
 
   const handleSubmit = async (event) => {
@@ -29,7 +29,7 @@ export function useHandleSubmitForm ({ functionFetch }) {
 
       setTimeout(() => {
         setModificationInfo(true)
-      }, 5 * 1000)
+      }, 4 * 1000)
     }
   }
   return { handleSubmit }

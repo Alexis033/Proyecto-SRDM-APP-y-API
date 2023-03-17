@@ -79,7 +79,7 @@ export const FormStudent = ({ userData, functionFetch, children }) => {
             name='grade'
             id='grade'
             aria-label='Default select example'
-            defaultValue={userData ? userData.ide_curso : ''}
+            defaultValue={userData ? userData.id_curso : ''}
             required
           >
             <option disabled value=''>

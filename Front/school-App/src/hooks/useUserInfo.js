@@ -1,15 +1,14 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { URL_GET_USER_INFO } from '../assets/endpoints/api'
-import { LoginContext } from '../context/login'
-import { UserContext } from '../context/userInfo'
+import { useLoginContext } from './useLoginContext'
+import { useUserContext } from './useUserContext'
 
 export function useUserInfo () {
   const [error, setError] = useState('')
-  const { isLogin, setIsLogin } = useContext(LoginContext)
+  const { isLogin, setIsLogin } = useLoginContext()
   const { userInfo, setUserInfo, modificationInfo, setModificationInfo } =
-    useContext(UserContext)
+    useUserContext()
 
-  console.log(modificationInfo)
   useEffect(() => {
     setModificationInfo(false)
 

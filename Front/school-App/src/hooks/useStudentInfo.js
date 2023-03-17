@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { URL_STUDENT } from '../assets/endpoints/api'
-import { UserContext } from '../context/userInfo'
-import { LoginContext } from '../context/login'
+import { useLoginContext } from './useLoginContext'
+import { useUserContext } from './useUserContext'
 
 export function useStudentInfo () {
   const [error, setError] = useState('')
-  const { isLogin } = useContext(LoginContext)
-  const { userInfo, setStudentInfo, modificationInfo } = useContext(UserContext)
+  const { isLogin } = useLoginContext()
+  const { userInfo, setStudentInfo, modificationInfo } = useUserContext()
 
   useEffect(() => {
     if (isLogin === true) {

@@ -1,16 +1,16 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { login } from '../logic/login'
 import { ModalStatic } from './ModalStatic'
 import './Login.css'
 import { useShowModal } from '../hooks/useShowModal'
-import { UserContext } from '../context/userInfo'
 import { useLoginState } from '../hooks/useLoginState'
+import { useUserContext } from '../hooks/useUserContext'
 
 export const Login = () => {
   const [error, setError] = useState('')
   const { show, handleShow, handleClose } = useShowModal()
   const { loginState } = useLoginState()
-  const { setUserInfo, setStudentInfo } = useContext(UserContext)
+  const { setUserInfo, setStudentInfo } = useUserContext()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
