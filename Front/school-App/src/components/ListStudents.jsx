@@ -43,7 +43,7 @@ export const ListStudents = () => {
                     </td>
                     <td>{student.id}</td>
                     <td>{student.id_curso}</td>
-                    <td>
+                    <td className='text-start'>
                       <a className='text-decoration-none text-dark' href='#'>
                         {student.apellidos} {student.nombres}
                       </a>

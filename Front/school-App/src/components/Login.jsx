@@ -5,6 +5,7 @@ import './Login.css'
 import { useShowModal } from '../hooks/useShowModal'
 import { useLoginState } from '../hooks/useLoginState'
 import { useUserContext } from '../hooks/useUserContext'
+import { redirect } from 'react-router-dom'
 
 export const Login = () => {
   const [error, setError] = useState('')
@@ -24,6 +25,7 @@ export const Login = () => {
     loginState(answer)
     setError(answer)
     if (answer !== null) handleShow()
+    else redirect('/')
   }
 
   return (

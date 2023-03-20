@@ -1,7 +1,8 @@
 import { useLoginState } from '../hooks/useLoginState'
 import { useUserContext } from '../hooks/useUserContext'
+import { Link } from 'react-router-dom'
 
-export const Menu = ({ handleClick }) => {
+export const Menu = () => {
   const { loginState } = useLoginState()
   const { userInfo } = useUserContext()
 
@@ -9,13 +10,9 @@ export const Menu = ({ handleClick }) => {
     <div className='container-fluid p-0'>
       <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
         <div className='container-fluid'>
-          <a
-            href='#'
-            className='navbar-brand'
-            onClick={() => handleClick('Home')}
-          >
+          <Link to='/' className='navbar-brand'>
             SRDM
-          </a>
+          </Link>
           <button
             type='button'
             className='navbar-toggler'
@@ -32,34 +29,32 @@ export const Menu = ({ handleClick }) => {
               {userInfo.id_rol === 2 && (
                 <>
                   <li className='nav-item'>
-                    <a
+                    <Link
                       className='nav-link'
                       aria-current='page'
-                      href='#'
-                      onClick={() => handleClick('personalInfo')}
+                      to='/personalInfo'
                     >
                       Información personal
-                    </a>
+                    </Link>
                   </li>
                   <li className='nav-item dropdown'>
-                    <a
+                    <Link
                       className='nav-link dropdown-toggle'
-                      href='#'
                       role='button'
                       data-bs-toggle='dropdown'
                     >
                       Subir Documentos
-                    </a>
+                    </Link>
                     <ul className='dropdown-menu'>
                       <li>
-                        <a className='dropdown-item' href='#'>
+                        <Link className='dropdown-item' to='/uploadDocuments'>
                           Cargar Documentos
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a className='dropdown-item' href='#'>
+                        <Link className='dropdown-item' to='/pendingDocuments'>
                           Ver Documentos Pendientes
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>
@@ -68,32 +63,24 @@ export const Menu = ({ handleClick }) => {
 
               {userInfo.id_rol === 1 && (
                 <li className='nav-item dropdown'>
-                  <a
+                  <Link
                     className='nav-link dropdown-toggle'
-                    href='#'
+                    to='#'
                     role='button'
                     data-bs-toggle='dropdown'
                   >
                     Verificación y matricula
-                  </a>
+                  </Link>
                   <ul className='dropdown-menu'>
                     <li>
-                      <a
-                        className='dropdown-item'
-                        href='#'
-                        onClick={() => handleClick('createStudent')}
-                      >
+                      <Link className='dropdown-item' to='/createStudent'>
                         Crear Nuevo estudiante
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        className='dropdown-item'
-                        href='#'
-                        onClick={() => handleClick('listStudents')}
-                      >
+                      <Link className='dropdown-item' to='/listStudents'>
                         Lista de alumnos
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -102,15 +89,15 @@ export const Menu = ({ handleClick }) => {
 
             <ul className='navbar-nav ms-3'>
               <li className='nav-item position-absolute top-0 end-0'>
-                <a
+                <Link
                   className='nav-link text-nowrap'
-                  href='#'
+                  to=''
                   onClick={() => {
                     loginState('cerrar')
                   }}
                 >
                   Cerrar Sesión
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

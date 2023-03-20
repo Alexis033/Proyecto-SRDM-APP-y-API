@@ -5,7 +5,7 @@ import { ListStudents } from './ListStudents'
 // import { UploadDocument } from './UploadDocument'
 // import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
 import { WelcomePage } from './WelcomePage'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ModalContext } from '../context/modal'
 import { ModalStatic } from './ModalStatic'
 import { createUserAndStudent } from '../logic/createUserAndStudent.js'
@@ -14,12 +14,13 @@ import { updateUserAndStudent } from '../logic/updateUserAndStudent'
 import { useUserInfo } from '../hooks/useUserInfo'
 import { useUserContext } from '../hooks/useUserContext'
 
+import { Routes, Route } from 'react-router-dom'
+
 export const InnerApp = () => {
   useUserInfo()
   useStudentInfo()
 
   const { userInfo, studentInfo } = useUserContext()
-  const [position, setPosition] = useState('Home')
   const { show, handleClose, message } = useContext(ModalContext)
 
   console.log(userInfo)
@@ -27,20 +28,69 @@ export const InnerApp = () => {
 
   return (
     <>
-      <Menu handleClick={setPosition} />
-      {position === 'Home' && <WelcomePage />}
-      {position === 'createStudent' && (
-        <FormStudent functionFetch={createUserAndStudent}>Crear</FormStudent>
-      )}
-      {position === 'listStudents' && <ListStudents />}
-      {position === 'personalInfo' && (
-        <FormStudent
-          userData={studentInfo}
-          functionFetch={updateUserAndStudent}
-        >
-          Actualizar
-        </FormStudent>
-      )}
+      <Menu />
+      <Routes>
+        <Route path='/' element={<WelcomePage />} />
+
+        <Route
+          path='/listStudents'
+          element={
+            userInfo.id_rol === 2
+              ? (
+                <p
+                  style={{
+                    marginTop: '100px',
+                    marginBottom: '50px',
+                    fontSize: '50px'
+                  }}
+                  className='text-center'
+                >
+                  🚧 Usuario no autorizado para esta acción 🚧
+                </p>
+                )
+              : (
+                <ListStudents />
+                )
+          }
+        />
+
+        <Route
+          path='/createStudent'
+          element={
+            userInfo.id_rol === 2
+              ? (
+                <p
+                  style={{
+                    marginTop: '100px',
+                    marginBottom: '50px',
+                    fontSize: '50px'
+                  }}
+                  className='text-center'
+                >
+                  🚧 Usuario no autorizado para esta acción 🚧
+                </p>
+                )
+              : (
+                <FormStudent functionFetch={createUserAndStudent}>
+                  Crear
+                </FormStudent>
+                )
+          }
+        />
+
+        <Route
+          path='/personalInfo'
+          element={
+            <FormStudent
+              userData={studentInfo}
+              functionFetch={updateUserAndStudent}
+            >
+              Actualizar
+            </FormStudent>
+          }
+        />
+      </Routes>
+
       <ModalStatic
         title='Información'
         content={message}
