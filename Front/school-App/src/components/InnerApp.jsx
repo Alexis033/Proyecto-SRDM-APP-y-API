@@ -3,7 +3,7 @@ import { FormStudent } from './FormStudent'
 // import { ListPendingDocuments } from './ListPendingDocuments'
 import { ListStudents } from './ListStudents'
 // import { UploadDocument } from './UploadDocument'
-// import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
+import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
 import { WelcomePage } from './WelcomePage'
 import { useContext } from 'react'
 import { ModalContext } from '../context/modal'
@@ -13,7 +13,6 @@ import { useStudentInfo } from '../hooks/useStudentInfo.js'
 import { updateUserAndStudent } from '../logic/updateUserAndStudent'
 import { useUserInfo } from '../hooks/useUserInfo'
 import { useUserContext } from '../hooks/useUserContext'
-
 import { Routes, Route } from 'react-router-dom'
 
 export const InnerApp = () => {
@@ -23,19 +22,18 @@ export const InnerApp = () => {
   const { userInfo, studentInfo } = useUserContext()
   const { show, handleClose, message } = useContext(ModalContext)
 
-  console.log(userInfo)
-  console.log(studentInfo)
+  // console.log(userInfo)
+  // console.log(studentInfo)
 
   return (
     <>
       <Menu />
       <Routes>
         <Route path='/' element={<WelcomePage />} />
-
         <Route
           path='/listStudents'
           element={
-            userInfo.id_rol === 2
+            userInfo.id_rol !== 1
               ? (
                 <p
                   style={{
@@ -53,11 +51,16 @@ export const InnerApp = () => {
                 )
           }
         />
-
+        **
+        <Route
+          path='/listStudents/:mail/:name'
+          element={<ValidationDocumentsStudent />}
+        />
+        **
         <Route
           path='/createStudent'
           element={
-            userInfo.id_rol === 2
+            userInfo.id_rol !== 1
               ? (
                 <p
                   style={{
@@ -77,7 +80,6 @@ export const InnerApp = () => {
                 )
           }
         />
-
         <Route
           path='/personalInfo'
           element={
@@ -87,6 +89,21 @@ export const InnerApp = () => {
             >
               Actualizar
             </FormStudent>
+          }
+        />
+        <Route
+          path='*'
+          element={
+            <h2
+              style={{
+                marginTop: '100px',
+                marginBottom: '50px',
+                fontSize: '50px'
+              }}
+              className='text-center'
+            >
+              🚧 404 🚧
+            </h2>
           }
         />
       </Routes>

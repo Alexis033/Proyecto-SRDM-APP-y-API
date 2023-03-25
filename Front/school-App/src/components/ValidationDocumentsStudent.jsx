@@ -1,9 +1,21 @@
+import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router'
+
 export const ValidationDocumentsStudent = () => {
+  const { mail, name } = useParams()
+  const navigate = useNavigate()
+  console.log(mail, name)
+
+  useEffect(() => {
+    async function fetch (mail) {}
+    fetch(mail)
+  }, [])
+
   return (
     <div className='container' style={{ marginTop: '100px' }}>
       <div className='row'>
         <div className='col'>
-          <h2 className='text-center'>Nombre del estudiante</h2>
+          <h2 className='text-center'>{name}</h2>
           <table className='table table-hover border border-5 text-center caption-top'>
             <thead className='table-primary'>
               <tr>
@@ -67,7 +79,13 @@ export const ValidationDocumentsStudent = () => {
         </div>
       </div>
       <div className='d-grid m-4'>
-        <button type='button' className='btn btn-primary mx-auto'>
+        <button
+          type='button'
+          className='btn btn-primary mx-auto'
+          onClick={() => {
+            navigate(-1)
+          }}
+        >
           Regresar a lista de estudiantes
         </button>
       </div>

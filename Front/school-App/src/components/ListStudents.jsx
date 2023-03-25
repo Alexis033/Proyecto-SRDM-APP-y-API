@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useGetStudents } from '../hooks/useGetStudents'
 import { usePagination } from '../hooks/usePagination'
 import { useSearchStudent } from '../hooks/useSearchStudent'
@@ -5,7 +6,7 @@ import { Pagination } from './Pagination'
 import { SearchBar } from './SearchBar'
 
 export const ListStudents = () => {
-  const studentsPerPage = 20
+  const studentsPerPage = 30
 
   const { listStudents } = useGetStudents()
   const { handlePageChange, elementsToRender, currentPage } = usePagination({
@@ -44,9 +45,15 @@ export const ListStudents = () => {
                     <td>{student.id}</td>
                     <td>{student.id_curso}</td>
                     <td className='text-start'>
-                      <a className='text-decoration-none text-dark' href='#'>
+                      <Link
+                        className='text-decoration-none text-dark'
+                        to={`${student.correo}/${student.nombres.concat(
+                          ' ',
+                          student.apellidos
+                        )}`}
+                      >
                         {student.apellidos} {student.nombres}
-                      </a>
+                      </Link>
                     </td>
                     <td> {student.estado}</td>
                   </tr>
