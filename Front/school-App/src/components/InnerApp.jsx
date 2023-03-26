@@ -2,7 +2,7 @@ import { Menu } from './Menu'
 import { FormStudent } from './FormStudent'
 // import { ListPendingDocuments } from './ListPendingDocuments'
 import { ListStudents } from './ListStudents'
-// import { UploadDocument } from './UploadDocument'
+import { UploadDocument } from './UploadDocument'
 import { ValidationDocumentsStudent } from './ValidationDocumentsStudent'
 import { WelcomePage } from './WelcomePage'
 import { useContext } from 'react'
@@ -90,6 +90,10 @@ export const InnerApp = () => {
               Actualizar
             </FormStudent>
           }
+        />
+        <Route
+          path='/UploadDocuments'
+          element={<UploadDocument />}
         />
         <Route
           path='*'
