@@ -19,6 +19,11 @@ Este proyecto es una aplicación web que permite la gestión de la documentació
 ## Uso
 
 En construcción.
+- [Web App](https://alexis033.github.io/SRDM/) Es importante recordar que se **requiere un usuario y contraseña registrada**, cuando se despliegue la API se pondrá uno de prueba.
+
+- API: pendiente de desplegar, sin embargo puedes ver el codigo en este repositorio
+
+- Base de datos SQL: Pendiente de desplegar
 
 ## Contribución
 
