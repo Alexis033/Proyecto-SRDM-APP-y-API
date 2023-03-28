@@ -9,6 +9,7 @@ class StudentDBSchema(BaseModel):
     documento_identidad : int
     edad : int
     telefono : int | None
+    estado: str | None
 
     class Config:
         orm_mode = True
@@ -21,6 +22,7 @@ class StudentUpdatechema(BaseModel):
     documento_identidad : int | None
     edad : int | None
     telefono : int | None
+    estado: str | None
 
     class Config:
         orm_mode = True

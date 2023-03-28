@@ -2,17 +2,31 @@ import { useState } from 'react'
 import { login } from '../logic/login'
 import { ModalStatic } from './ModalStatic'
 import './Login.css'
+import { useShowModal } from '../hooks/useShowModal'
+import { useLoginState } from '../hooks/useLoginState'
+import { useUserContext } from '../hooks/useUserContext'
+import { redirect } from 'react-router-dom'
 
-export const Login = ({ loginState }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export const Login = () => {
   const [error, setError] = useState('')
+  const { show, handleShow, handleClose } = useShowModal()
+  const { loginState } = useLoginState()
+  const { setUserInfo, setStudentInfo } = useUserContext()
 
-  const [show, setShow] = useState(false)
-  const handleClose = () => {
-    setShow(false)
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setUserInfo({})
+    setStudentInfo({})
+
+    const { email, password } = Object.fromEntries(
+      new window.FormData(event.target)
+    )
+    const answer = await login({ event, email, password })
+    loginState(answer)
+    setError(answer)
+    if (answer !== null) handleShow()
+    else redirect('/')
   }
-  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -21,7 +35,7 @@ export const Login = ({ loginState }) => {
           <div className='row align-items-stretch'>
             <div
               id='image-container'
-              className='col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-start'
+              className='col bg d-none d-md-block col-md-5 col-lg-5 col-xl-6 rounded-start'
             />
             <div className='col bg-white rounded-end'>
               <div className='text-end mt-2'>
@@ -37,16 +51,12 @@ export const Login = ({ loginState }) => {
 
               <form
                 id='login'
+                className='row flex-column'
                 method='post'
                 autoComplete='off'
-                onSubmit={async (event) => {
-                  const answer = await login({ event, email, password })
-                  loginState(answer)
-                  setError(answer)
-                  if (answer !== null) handleShow()
-                }}
+                onSubmit={handleSubmit}
               >
-                <div className='mb-4'>
+                <div className='col mb-3'>
                   <label htmlFor='email' className='form-label'>
                     Correo electrónico
                   </label>
@@ -58,11 +68,9 @@ export const Login = ({ loginState }) => {
                     required
                     autoComplete='off'
                     pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
-                <div className='mb-4'>
+                <div className='col mb-5'>
                   <label htmlFor='password' className='form-label'>
                     Contraseña
                   </label>
@@ -73,13 +81,10 @@ export const Login = ({ loginState }) => {
                     name='password'
                     required
                     autoComplete='off'
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
-                <div className='mb-1 form-check' />
 
-                <div className='d-grid mb-4'>
+                <div className='col-sm-7 mx-auto mb-5 d-flex justify-content-center '>
                   <button
                     type='submit'
                     id='btn-session'

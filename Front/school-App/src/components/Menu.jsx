@@ -1,11 +1,18 @@
-export const Menu = ({ logOut, rol }) => {
+import { useLoginState } from '../hooks/useLoginState'
+import { useUserContext } from '../hooks/useUserContext'
+import { Link } from 'react-router-dom'
+
+export const Menu = () => {
+  const { loginState } = useLoginState()
+  const { userInfo } = useUserContext()
+
   return (
     <div className='container-fluid p-0'>
-      <nav className='navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
+      <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-3 border-bottom border-primary fixed-top'>
         <div className='container-fluid'>
-          <a href='#' className='navbar-brand'>
+          <Link to='/' className='navbar-brand'>
             SRDM
-          </a>
+          </Link>
           <button
             type='button'
             className='navbar-toggler'
@@ -19,54 +26,61 @@ export const Menu = ({ logOut, rol }) => {
             className='collapse navbar-collapse position-relative'
           >
             <ul className='navbar-nav ms-3'>
-              <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='#'>
-                  Información personal
-                </a>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle'
-                  href='#'
-                  role='button'
-                  data-bs-toggle='dropdown'
-                >
-                  Subir Documentos
-                </a>
-                <ul className='dropdown-menu'>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Cargar Documentos
-                    </a>
+              {userInfo.id_rol === 2 && (
+                <>
+                  <li className='nav-item'>
+                    <Link
+                      className='nav-link'
+                      aria-current='page'
+                      to='/personalInfo'
+                    >
+                      Información personal
+                    </Link>
                   </li>
-                  <li>
-                    <a className='dropdown-item' href='#'>
-                      Ver Documentos Pendientes
-                    </a>
+                  <li className='nav-item dropdown'>
+                    <Link
+                      className='nav-link dropdown-toggle'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                    >
+                      Subir Documentos
+                    </Link>
+                    <ul className='dropdown-menu'>
+                      <li>
+                        <Link className='dropdown-item' to='/uploadDocuments'>
+                          Cargar Documentos
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className='dropdown-item' to='/pendingDocuments'>
+                          Ver Documentos Pendientes
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
-                </ul>
-              </li>
+                </>
+              )}
 
-              {rol === 1 && (
+              {userInfo.id_rol === 1 && (
                 <li className='nav-item dropdown'>
-                  <a
+                  <Link
                     className='nav-link dropdown-toggle'
-                    href='#'
+                    to='#'
                     role='button'
                     data-bs-toggle='dropdown'
                   >
-                    Herramientas de verificación y matricula
-                  </a>
+                    Verificación y matricula
+                  </Link>
                   <ul className='dropdown-menu'>
                     <li>
-                      <a className='dropdown-item' href='#'>
+                      <Link className='dropdown-item' to='/createStudent'>
                         Crear Nuevo estudiante
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className='dropdown-item' href='#'>
+                      <Link className='dropdown-item' to='/listStudents'>
                         Lista de alumnos
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -75,13 +89,15 @@ export const Menu = ({ logOut, rol }) => {
 
             <ul className='navbar-nav ms-3'>
               <li className='nav-item position-absolute top-0 end-0'>
-                <a
+                <Link
                   className='nav-link text-nowrap'
-                  href='#'
-                  onClick={() => logOut('cerrar')}
+                  to=''
+                  onClick={() => {
+                    loginState('cerrar')
+                  }}
                 >
                   Cerrar Sesión
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

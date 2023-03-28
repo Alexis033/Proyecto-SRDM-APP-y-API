@@ -48,7 +48,7 @@ async def create_student(data_student: StudentDBSchema, db: Session =Depends(get
     return student_db
 
 @student.put("/update/{correo}", response_model= StudentDBSchema)
-async def create_student(correo: str, new_data_student: StudentUpdatechema, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
+async def update_student(correo: str, new_data_student: StudentUpdatechema, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
     if user.id_rol!=1:
         correo= user.usuario
     student_db=await search_student(correo,db)
@@ -58,3 +58,14 @@ async def create_student(correo: str, new_data_student: StudentUpdatechema, db: 
     db.commit()
     db.refresh(student_db)
     return student_db
+
+@student.delete("/{id}", status_code= status.HTTP_204_NO_CONTENT)
+async def delete_user(id: int, db: Session =Depends(get_db), user: UserSchema= Depends(current_user)):
+    if user.id_rol!=1:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no autorizado")
+    
+    student_db= db.get(EstudianteDB, id)
+    if not student_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Estudiante no encontrado")
+    db.delete(student_db)
+    db.commit() 

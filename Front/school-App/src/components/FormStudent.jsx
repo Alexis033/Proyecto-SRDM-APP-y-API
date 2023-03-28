@@ -1,4 +1,9 @@
-export const FormStudent = ({ userData }) => {
+import { useHandleSubmitForm } from '../hooks/useHandleSubmitForm.js'
+
+export const FormStudent = ({ userData, functionFetch, children }) => {
+  const { handleSubmit } = useHandleSubmitForm({
+    functionFetch
+  })
   return (
     <main
       className='container w-75 rounded shadow'
@@ -7,6 +12,7 @@ export const FormStudent = ({ userData }) => {
       <form
         className='row g-3 justify-content-center'
         id='formulario-información-estudiante'
+        onSubmit={handleSubmit}
       >
         <div className='border-top border-bottom border-primary border-3 mt-0 bg-'>
           <h3 className='fw-bold text-center'>Información Estudiante</h3>
@@ -20,8 +26,7 @@ export const FormStudent = ({ userData }) => {
             className='form-control'
             name='name'
             id='name'
-            value={userData && userData.firstName}
-            placeholder='Pedro'
+            defaultValue={userData && userData.nombres}
             required
           />
         </div>
@@ -34,8 +39,7 @@ export const FormStudent = ({ userData }) => {
             className='form-control'
             name='surname'
             id='surname'
-            value={userData && userData.lastName}
-            placeholder='Garcia'
+            defaultValue={userData && userData.apellidos}
             required
           />
         </div>
@@ -48,24 +52,22 @@ export const FormStudent = ({ userData }) => {
             className='form-control'
             name='age'
             id='age'
-            value={userData && userData.age}
-            placeholder='6'
+            defaultValue={userData && userData.edad}
             min='1'
             max='19'
             required
           />
         </div>
         <div className='col-11 col-md-8'>
-          <label htmlFor='id' className='form-label fw-bold'>
+          <label htmlFor='document-id' className='form-label fw-bold'>
             Documento de identidad
           </label>
           <input
             type='number'
             className='form-control'
-            name='id'
-            id='id'
-            value={userData && userData.birthDate}
-            placeholder='11123445656767'
+            name='documentId'
+            id='documentId'
+            defaultValue={userData && userData.documento_identidad}
           />
         </div>
         <div className='col-11 col-md-8'>
@@ -73,12 +75,14 @@ export const FormStudent = ({ userData }) => {
             Grado
           </label>
           <select
-            class='form-select'
-            name='gadre'
-            id='gadre'
+            className='form-select'
+            name='grade'
+            id='grade'
             aria-label='Default select example'
+            defaultValue={userData ? userData.id_curso : ''}
+            required
           >
-            <option selected disabled>
+            <option disabled value=''>
               Selecciona el grado
             </option>
             <option value='1'>Primero</option>
@@ -89,21 +93,33 @@ export const FormStudent = ({ userData }) => {
           </select>
         </div>
         <div className='col-11 col-md-8'>
-          <label htmlFor='emailInput' className='form-label fw-bold'>
+          <label htmlFor='email' className='form-label fw-bold'>
             Correo electrónico
           </label>
           <input
-            type='email'
+            type='text'
             className='form-control'
-            name='emailInput'
-            id='emailInput'
-            value={userData && userData.mail}
+            name='email'
+            id='email'
+            defaultValue={userData && userData.correo}
             pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'
-            placeholder='pedro@gmail.co'
             required
+            autoComplete='off'
           />
         </div>
-
+        <div className='col-11 col-md-8'>
+          <label htmlFor='telNumber' className='form-label fw-bold'>
+            Número celular
+          </label>
+          <input
+            type='tel'
+            className='form-control'
+            name='telNumber'
+            id='telNumber'
+            defaultValue={userData && userData.telefono}
+            pattern='^[0-9]{10}$'
+          />
+        </div>
         <div className='col-11 col-md-8'>
           <label htmlFor='password' className='form-label fw-bold'>
             Contraseña
@@ -113,13 +129,13 @@ export const FormStudent = ({ userData }) => {
             className='form-control'
             name='password'
             id='password'
-            value={userData && userData.password}
-            placeholder='Escribe tu nueva contraseña'
+            autoComplete='off'
+            placeholder='Llenar si deseas cambiarla'
           />
         </div>
         <div className='d-grid col-12 mt-4 mb-4'>
           <button type='submit' className='btn btn-primary mx-auto'>
-            Subir Información
+            {children}
           </button>
         </div>
       </form>
