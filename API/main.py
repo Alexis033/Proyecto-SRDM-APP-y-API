@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import documents, user, authentication_users, student, files
+from routers import documents, user, authentication_users, student, files, document_list
 from fastapi.middleware.cors import CORSMiddleware 
 
 app= FastAPI()
@@ -25,6 +25,7 @@ app.include_router(authentication_users.authentication)
 app.include_router(student.student)
 app.include_router(documents.documents)
 app.include_router(files.files)
+app.include_router(document_list.document_list)
 
 
 # @app.get("/", response_class= HTMLResponse)
