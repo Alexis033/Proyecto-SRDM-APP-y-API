@@ -11,6 +11,8 @@ files= APIRouter(prefix="/files",
 
 @files.post("/{studentId}")
 async def upload_file(studentId:str, filename:str, user: UserSchema= Depends(current_user), file: UploadFile= File(...)):
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No se ha proporcionado un archivo para cargar.")
     upload_folder = os.path.join("files", studentId)
     os.makedirs(upload_folder, exist_ok=True)
     file_location = os.path.join(upload_folder, filename)
@@ -18,7 +20,7 @@ async def upload_file(studentId:str, filename:str, user: UserSchema= Depends(cur
         content = await file.read()
         myfile.write(content)
         myfile.close()
-    return {"message": "File uploaded successfully",
+    return {"message": "Documento cargado exitosamente",
             "file_location": file_location}
 
 @files.get("/{path}")
