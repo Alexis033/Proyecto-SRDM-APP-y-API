@@ -34,12 +34,12 @@ async def upload_document(
         data_document.id_estudiante= id_student
     
     new_document= data_document.dict()
-    document_verification= db.query(DocumentoDB).filter(
-        DocumentoDB.id_estudiante == new_document["id_estudiante"],  
-        DocumentoDB.id_lista_documentos == new_document["id_lista_documentos"]
-        ).first()
-    if document_verification: 
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="El documento ya existe")
+    # document_verification= db.query(DocumentoDB).filter(
+    #     DocumentoDB.id_estudiante == new_document["id_estudiante"],  
+    #     DocumentoDB.id_lista_documentos == new_document["id_lista_documentos"]
+    #     ).first()
+    # if document_verification: 
+    #     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="El documento ya existe")
 
     document_db = DocumentoDB(**new_document)
     db.add(document_db)
