@@ -30,6 +30,7 @@ app.include_router(files.files)
 app.include_router(document_list.document_list)
 
 
+
 @app.get("/", response_class= HTMLResponse)
 def root():
     html_address= "./public/static/html/index.html"
