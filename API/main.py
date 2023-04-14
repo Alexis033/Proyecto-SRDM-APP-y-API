@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from routers import documents, user, authentication_users, student, files, document_list
 from fastapi.middleware.cors import CORSMiddleware 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, FileResponse
 
 app= FastAPI()
-# app.mount("/static", StaticFiles(directory="./public/static"), name="static")
+app.mount("/static", StaticFiles(directory="./public/static"), name="static")
 
 origins = [
     "http://localhost",
@@ -28,15 +30,12 @@ app.include_router(files.files)
 app.include_router(document_list.document_list)
 
 
-# @app.get("/", response_class= HTMLResponse)
-# def root():
-#     html_address= "./public/static/html/login.html"
-#     return FileResponse(html_address)
+@app.get("/", response_class= HTMLResponse)
+def root():
+    html_address= "./public/static/html/index.html"
+    return FileResponse(html_address)
 
-# @app.get("/menu", response_class= HTMLResponse)
-# def menu():            
-#     html_address= "./public/static/html/menu.html"
-#     return FileResponse(html_address)
+
 
     #iniciar entorno virtual en windows: venv\Scripts\activate  
     #iniciar servidor local: uvicorn main:app --reload

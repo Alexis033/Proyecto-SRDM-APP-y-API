@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from schema.user_schema import UserSchema
 import os
 from shutil import rmtree
 from routers.authentication_users import current_user
+import mimetypes
 
 
 files= APIRouter(prefix="/files",
@@ -25,7 +26,17 @@ async def upload_file(studentId:str, filename:str, user: UserSchema= Depends(cur
 
 @files.get("/{path}")
 def get_file (path: str, user: UserSchema= Depends(current_user)):
-    return FileResponse(path)
+    
+    def file_generator():
+        with open(path, "rb") as file:
+            while True:
+                chunk = file.read(4096)
+                if not chunk:
+                    break
+                yield chunk
+    content_type = mimetypes.guess_type(path)[0] or "application/octet-stream"
+    return StreamingResponse(file_generator(), media_type=content_type)
+    # return FileResponse(path)
 
 @files.get("/download/{path}")
 def download_file (path: str, user: UserSchema= Depends(current_user)):
