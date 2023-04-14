@@ -51,7 +51,7 @@ class EstudianteDB(Base):
 
 class ListaDocumentosDB(Base):
     __tablename__= "lista_documentos"
-    id = Column("id", Integer, primary_key=True, nullable=False, unique=True)
+    id = Column("id", Integer, primary_key=True, nullable=False, unique=True, index=True)
     nombre_documento = Column("nombre_documento", String(50), nullable=False)
 
 class DocumentoDB(Base):
