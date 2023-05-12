@@ -5,7 +5,7 @@ from config.db import get_db
 from model.models import DocumentoDB
 from routers.student import search_student
 from schema.user_schema import UserSchema
-from schema.documents_schema import DeleteDocumentsDBSchema, DocumentsDBSchema
+from schema.documents_schema import DeleteDocumentsDBSchema, DocumentsDBSchema, UpdateDocumentsDBSchema
 
 
 from routers.authentication_users import current_user
@@ -34,12 +34,12 @@ async def upload_document(
         data_document.id_estudiante= id_student
     
     new_document= data_document.dict()
-    # document_verification= db.query(DocumentoDB).filter(
-    #     DocumentoDB.id_estudiante == new_document["id_estudiante"],  
-    #     DocumentoDB.id_lista_documentos == new_document["id_lista_documentos"]
-    #     ).first()
-    # if document_verification: 
-    #     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="El documento ya existe")
+    document_verification= db.query(DocumentoDB).filter(
+        DocumentoDB.id_estudiante == new_document["id_estudiante"],  
+        DocumentoDB.id_lista_documentos == new_document["id_lista_documentos"]
+        ).first()
+    if document_verification: 
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="El documento ya existe")
 
     document_db = DocumentoDB(**new_document)
     db.add(document_db)
@@ -50,7 +50,7 @@ async def upload_document(
 
 @documents.put("/", response_model= DocumentsDBSchema)
 async def update_document(
-        new_data_document: DocumentsDBSchema, 
+        new_data_document: UpdateDocumentsDBSchema, 
         user: UserSchema= Depends(current_user), 
         db: Session =Depends(get_db)):
     
